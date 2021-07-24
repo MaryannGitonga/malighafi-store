@@ -2,25 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\AccountStatus;
 use App\Enums\UserType;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
-use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Storage;
 
 class BuyerController extends Controller
 {
-    public function profile(Request $request) {
+    public function profile_index(Request $request) {
         // user to populate the profile form
         $user = $request->user();
-
-        // Create a token incase the user wants to reset their password
-        DB::table('password_resets')->insert([
-            'email' => $request->user()->email,
-            'token' => bcrypt(Str::random(60)),
-            'created_at' => Carbon::now()
-        ]);
 
         return view('buyer.profile', compact('user'));
     }
@@ -29,18 +21,26 @@ class BuyerController extends Controller
     {
         // validate form request
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'string|max:255',
+            'profile_photo' => 'mimes:png,jpg'
         ]);
 
         // if name value is not empty, update user name
         if($request->has('name')){
-                $request->user()->name = $validated['name'];
+            $request->user()->name = $validated['name'];
+        }
+
+        if ($request->file()) {
+            $file_name = time().'_'.$request->file('profile_photo')->getClientOriginalName();
+            $file_path = $request->file('profile_photo')->storeAs('profile_photos', $file_name, 'public');
+
+            $request->user()->profile_photo_path = $file_path;
         }
 
         // save user instance
         $request->user()->save();
 
-        return redirect('/profile')->with('success', 'Name updated succesfully!');
+        return redirect()->route('buyer.profile')->with('success', 'Profile updated succesfully!');
     }
 
     public function update_mpesa(Request $request)
@@ -58,7 +58,7 @@ class BuyerController extends Controller
         // save user instance
         $request->user()->save();
 
-        return redirect('/profile')->with('success', 'Mpesa number updated succesfully!');
+        return redirect()->route('buyer.profile')->with('success', 'Mpesa number updated succesfully!');
     }
 
     public function update_address(Request $request)
@@ -88,8 +88,43 @@ class BuyerController extends Controller
         // save user instance
         $request->user()->save();
 
-        return redirect('/profile')->with('success', 'Address details updated succesfully!');
+        return redirect()->route('buyer.profile')->with('success', 'Address details updated succesfully!');
     }
 
+    public function activate_vendor(Request $request)
+    {
+        $user = $request->user();
+
+        // Deactivate buyer account
+        DB::table('role_user')
+            ->where('user_id', $user->id)
+            ->where('role_id', UserType::Buyer)
+            ->update([
+                'status' => AccountStatus::Disabled
+            ]);
+
+        // if vendor account doesn't exists, create an instance
+        if(DB::table('role_user')
+        ->where('user_id', $user->id)
+        ->where('role_id', UserType::Vendor)
+        ->doesntExist())
+        {
+            DB::table('role_user')->insert([
+                'user_id' => $user->id,
+                'role_id' => UserType::Vendor,
+                'status' => AccountStatus::Active
+            ]);
+        }
+
+        // Otherwise
+        DB::table('role_user')
+            ->where('user_id', $user->id)
+            ->where('role_id', UserType::Vendor)
+            ->update([
+            'status' => AccountStatus::Active
+        ]);
+
+        return redirect()->route('vendor.profile');
+    }
 
 }

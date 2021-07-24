@@ -30,14 +30,14 @@
               </h3>
               <div class="mt-2">
                 <p class="text-md text-gray-500">
-                  Not to worry, your data in the buyer account is safe :)
+                  Not to worry, your data related to this account is safe :)
                 </p>
               </div>
             </div>
           </div>
         </div>
         <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-          <a href="{{ route('account.activate-vendor') }}" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm">
+          <a href="{{ route('account.activate-buyer') }}" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm">
             Switch
           </a>
           <button type="button" @click="isDialogOpen = false" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
@@ -49,18 +49,13 @@
   </div>
 </div>
 
-
     <div class="pt-10 sm:pt-12 pb-16 sm:pb-20 lg:pb-24 flex flex-col lg:flex-row justify-between">
         <div class="lg:w-1/4">
     <p class=" text-secondary text-2xl sm:text-3xl lg:text-4xl pb-6">My Account</p>
     <div class="pl-3 flex flex-col">
-        <a href="{{ route('account.index', \App\Enums\UserType::Buyer) }}"
+        <a href="{{ route('account.index', \App\Enums\UserType::Vendor) }}"
            class="transition-all hover:font-bold hover:text-indigo-500 px-4 py-3 border-l-2 border-indigo-500-lighter hover:border-indigo-500  font-hk font-bold text-indigo-500 border-indigo-500 ">My Account</a>
-        <a href=""
-           class="transition-all hover:font-bold hover:text-indigo-500 px-4 py-3 border-l-2 border-indigo-500-lighter hover:border-indigo-500  font-hk text-grey-darkest ">Orders</a>
-        <a href=""
-           class="transition-all hover:font-bold hover:text-indigo-500 px-4 py-3 border-l-2 border-indigo-500-lighter hover:border-indigo-500  font-hk text-grey-darkest ">Wishlist</a>
-        <a @click="isDialogOpen = true" class="transition-all hover:font-bold hover:text-indigo-500 px-4 py-3 border-l-2 border-indigo-500-lighter hover:border-indigo-500  font-hk text-grey-darkest">Switch To Vendor Account</a>
+        <a @click="isDialogOpen = true" class="transition-all hover:font-bold hover:text-indigo-500 px-4 py-3 border-l-2 border-indigo-500-lighter hover:border-indigo-500  font-hk text-grey-darkest">Switch to Buyer Account</a>
     </div>
     <a href="{{ route('logout') }}" onclick="event.preventDefault();
     document.getElementById('logout-form').submit();"
@@ -77,16 +72,16 @@
             @endif
             <div class="bg-grey-light py-10 px-6 sm:px-10 mb-6 rounded-lg">
                 <h1 class="font-hkbold text-secondary text-2xl sm:text-left mb-12">Account Details</h1>
-                <form method="POST" action="{{ route('account.update-profile') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('account.update-profile') }}">
                 @csrf
                 @method('PUT')
                     <div class="mb-12">
-                        <img src="{{ $user->profile_photo_path != null ? url(Storage::url($user->profile_photo_path)) : asset('images/avatar.png') }}" onerror="{{ asset('images/avatar.png') }}"
+                        <img src="{{ $user->profile_photo_path != null ? Storage::url($user->profile_photo_path) : asset('images/avatar.png') }}"
                         alt="user profile image"
-                        class="object-cover h-40 w-40 rounded-full overflow-hidden"/>
+                            class="object-cover h-40 w-40 rounded-full overflow-hidden"/>
 
-                        <input type="file" class="d-none" id="profile_photo" name="profile_photo" style="display: none;">
-                        <label for="profile_photo" class="w-auto md:w-64 mt-4 relative flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Change Profile Image</label>
+                        <input type="file" class="d-none" id="profile-upload" name="profile_upload" style="display: none;">
+                        <label for="profile-upload" class="w-auto md:w-64 mt-4 relative flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Change Profile Image</label>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5 md:mt-8">
                         @error('name')
@@ -192,30 +187,52 @@
 
             <div class="bg-grey-light py-10 px-6 sm:px-10 mb-6 rounded-lg">
                 <div class="mt-8">
-                    <h4 class="font-hkbold text-secondary text-xl sm:text-left mb-2">Payment Details</h4>
-                    <form action="{{ route('account.update-mpesa') }}" method="POST">
+                    <h4 class="font-hkbold text-secondary text-xl sm:text-left mb-2">Vendor Authorization Details</h4>
+                    <form action="" method="POST">
                     @csrf
                     @method('PUT')
-                        @error('mpesa_no')
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        @error('kra_pin')
+                            <div class=" mt-8 space-y-6 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </div>
+                        @enderror
+                        <div class="w-full">
+                            <label for="kra_pin"
+                                   class="font-hk text-secondary block mb-2">KRA Pin</label>
+                            <input type="text"
+                                   class="appearance-none rounded relative block w-full px-3 py-2 border-none placeholder-gray-500 text-gray-500 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 bg-grey-light" id="kra_pin" name="kra_pin" placeholder="KRA Pin" value="{{ $user->kra_pin }}"/>
+                        </div>
+                        @error('permit_no')
+                            <div class=" mt-8 space-y-6 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </div>
+                        @enderror
+                        <div class="w-full">
+                            <label for="permit_no"
+                                   class="font-hk text-secondary block mb-2">Permit Number</label>
+                            <input type="text"
+                                   class="appearance-none rounded relative block w-full px-3 py-2 border-none placeholder-gray-500 text-gray-500 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 bg-grey-light" id="permit_no" name="permit_no" placeholder="Permit Number" value="{{ $user->permit_no }}"/>
+                        </div>
+                    </div>
+                    @error('permit_upload')
                             <div class=" mt-8 space-y-6 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
                                 <strong>{{ $message }}</strong>
                             </div>
                         @enderror
                         <div class="mt-5">
-                            <label for="mpesa_no"
-                                   class="font-hk text-secondary block mb-2">Mpesa Number</label>
-                            <input type="text"
-                            class="appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10"
-                            id="mpesa_no" name="mpesa_no" placeholder="0712345678" value="{{ $user->mpesa_no }}"/>
+                            <label for="permit_upload"
+                                   class="font-hk text-secondary block mb-2">Permit Upload</label>
+                            <input type="text" id="permit_upload"
+                            class="appearance-none rounded relative block w-full px-3 py-2 border-none placeholder-gray-500 text-gray-500 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 bg-grey-light" name="permit_upload" placeholder="0712345678" value="{{ $user->permit_upload_path }}"/>
                         </div>
                     </div>
                         <div class="w-full sm:w-1/2 md:pr-5 mt-5">
                             <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">{{ __('Update Mpesa Number') }}</button>
                         </div>
                     </form>
+                </div>
             </div>
-                    </div>
-                </form>
         </div>
     </div>
 </div>

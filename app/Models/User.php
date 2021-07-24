@@ -25,6 +25,8 @@ class User extends Authenticatable
         'address',
         'kra_pin',
         'permit_no',
+        'permit_upload_path',
+        'profile_photo_path'
     ];
 
     /**
@@ -48,6 +50,6 @@ class User extends Authenticatable
 
     public function roles()
     {
-        return $this->belongsToMany(Role::class);
+        return $this->belongsToMany(Role::class)->withPivot('status');
     }
 }
