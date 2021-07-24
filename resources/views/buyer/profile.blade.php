@@ -81,7 +81,7 @@
                 @csrf
                 @method('PUT')
                     <div class="mb-12">
-                        <img src="{{ $user->profile_photo_path != null ? url(Storage::url($user->profile_photo_path)) : asset('images/avatar.png') }}" onerror="{{ asset('images/avatar.png') }}"
+                        <img src="{{ $user->profile_photo_path != null ? Storage::url($user->profile_photo_path) : asset('images/avatar.png') }}" onerror="{{ asset('images/avatar.png') }}"
                         alt="user profile image"
                         class="object-cover h-40 w-40 rounded-full overflow-hidden"/>
 
