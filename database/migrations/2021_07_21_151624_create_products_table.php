@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\StatusType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,9 +19,10 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->decimal('price',10,2);
-            $table->string('category');
+            $table->foreignId('category_id')->constrained();
+            $table->string('units');
             $table->string('path');
-            $table->enum('status', ['disallowed','allowed','in progress'])->default('in progress');
+            $table->tinyInteger('status')->unsigned()->default(StatusType::in_progress);
             $table->timestamps();
         });
     }

@@ -12,7 +12,7 @@ class Product extends Model
         'name',
         'description',
         'price',
-        'category',
+        'category_id',
         'path'
     ];
 }

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
-use Facade\FlareClient\Stacktrace\File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class ProductController extends Controller
 {
@@ -15,7 +17,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+         $products = DB::table('products')
+        ->get();
+        return view('view-products', compact('products'));
     }
 
     /**
@@ -25,7 +29,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('upload-product');
+        $categories = Category::all();
+        return view('upload-product',compact('categories'));
     }
 
     /**
@@ -44,23 +49,23 @@ class ProductController extends Controller
             'path' => ['required','mimes:jpg,jpeg,gif,png,pdf']
         ]);
 
-        $productModel = new Product;
+        $product_model = new Product;
 
         if($request->file('path')){
-            $fileName = time().'_'.$request->file('path')->getClientOriginalName();
-            $filePath = $request->file('path')->storeAs('uploads', $fileName, 'public');
+            $file_name = time().'_'.$request->file('path')->getClientOriginalName();
+            $file_path = $request->file('path')->storeAs('post-uploads', $file_name, 'public');
 
-            $productModel->name = $request->name;
-            $productModel->description = $request->description;
-            $productModel->price = $request->price;
-            $productModel->category = $request->category;
-            $productModel->path = '/storage/' . $filePath;
+            $product_model->name = $request->name;
+            $product_model->description = $request->description;
+            $product_model->price = $request->price;
+            $product_model->category_id = $request->category;
+            $product_model->path = '/storage/' . $file_path;
+            $product_model->units = $request->units;
 
-            $productModel->save();
-            return redirect()->route('products.create')->with('success','Product created successfully.');
+            $product_model->save();
+            return redirect()->route('products.index')->with('success','Product created successfully.');
 
         }
-
 
     }
 
@@ -81,9 +86,10 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-        //
+        return view('edit-image',compact('product'));
+
     }
 
     /**
@@ -93,10 +99,30 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,Product $product)
     {
-        //
+        $request->validate([
+            'name' => ['required'],
+            'description' => ['required'],
+            'price' => ['required']
+        ]);
+
+
+            // $file_name = time().'_'.$request->file('path')->getClientOriginalName();
+            // $file_path = $request->file('path')->storeAs('post-uploads', $file_name, 'public');
+
+
+            $product->update(['name'=> $request->name]);
+            $product->update(['description'=> $request->description]);
+            $product->update(['price'=> $request->price]);
+            $product->update(['units'=> $request->units]);
+
+            return redirect()->route('products.index');
+
+
+
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -104,9 +130,10 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return redirect()->route('products.index');
     }
 
 }
