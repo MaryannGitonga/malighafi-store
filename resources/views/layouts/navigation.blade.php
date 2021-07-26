@@ -36,7 +36,7 @@
             </a>
             @auth
                 <div class="flex items-center">
-                    <a href="{{ (Auth::user()->roles()->where('role_id', App\Enums\UserType::Buyer)->first()->pivot->status == App\Enums\AccountStatus::Active) ? route('account.index', \App\Enums\UserType::Buyer) : route('account.index', \App\Enums\UserType::Vendor) }}"
+                    <a href="{{ (Auth::user()->roles()->where('role_id', App\Enums\UserType::Buyer)->first()->pivot->status == App\Enums\AccountStatus::Active) ? route('buyer.profile') : route('vendor.profile') }}"
                     class="border-2 transition-all border-transparent hover:border-indigo-500 rounded-full p-2 sm:p-4 group">
                         <img src="{{ asset('assets/img/icons/icon-user.svg') }}"
                             class="w-5 sm:w-6 md:w-8 h-5 sm:h-6 md:h-8 block group-hover:hidden"
@@ -206,7 +206,7 @@
                 </li>
                 @else
                     <li class="mr-10">
-                        <a href="/"
+                        <a href="{{ route('vendor.products') }}"
                         class="block text-lg font-hk hover:font-bold transition-all text-secondary hover:text-indigo-500 border-b-2 border-white hover:border-indigo-500 px-2">My Products</a>
                     </li>
                     <li class="mr-10">
@@ -390,14 +390,14 @@
                 class="w-full py-3 cursor-pointer font-hk font-medium text-secondary border-b border-grey-dark block">My Cart
             </a>
             @else
-            <a href="{{ route('home') }}"
+            <a href="{{ route('vendor.products') }}"
                 class="w-full py-3 cursor-pointer font-hk font-medium text-secondary border-b border-grey-dark block ">My Products
             </a>
             <a href=""
                 class="w-full py-3 cursor-pointer font-hk font-medium text-secondary border-b border-grey-dark block">My Orders
             </a>
             @endif
-            <a href="{{ (Auth::user()->roles()->where('role_id', App\Enums\UserType::Buyer)->first()->pivot->status == App\Enums\AccountStatus::Active) ? route('account.index', \App\Enums\UserType::Buyer) : route('account.index', \App\Enums\UserType::Vendor) }}"
+            <a href="{{ (Auth::user()->roles()->where('role_id', App\Enums\UserType::Buyer)->first()->pivot->status == App\Enums\AccountStatus::Active) ? route('buyer.profile') : route('vendor.profile') }}"
             class="w-full py-3 cursor-pointer font-hk font-medium text-secondary border-b border-grey-dark block">My Account
             </a>
         @endauth

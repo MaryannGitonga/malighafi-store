@@ -24,30 +24,29 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => ['auth', 'prevent-back-history', 'verified']], function(){
-    Route::get('/home', [HomeController::class, 'create'])->name('home');
-    Route::get('/profile/{role}', [AccountController::class, 'index'])->name('account.index');
-    Route::put('/profile/update-profile', [AccountController::class, 'update_profile'])->name('account.update-profile');
-    Route::put('/profile/update-mpesa', [AccountController::class, 'update_mpesa'])->name('account.update-mpesa');
-    Route::put('/profile/update-address', [AccountController::class, 'update_address'])->name('account.update-address');
+    Route::get('home', [HomeController::class, 'create'])->name('home');
 
-    Route::post('/profile/check-permit', [AccountController::class, 'check_permit'])->name('account.check-permit');
-    Route::post('/profile/upload-permit', [AccountController::class, 'upload_permit'])->name('account.upload-permit');
-    Route::get('/profile/activate-vendor', [AccountController::class, 'activate_vendor'])->name('account.activate-vendor');
-    Route::get('/profile/activate-buyer', [AccountController::class, 'activate_buyer'])->name('account.activate-buyer');
-
-
+    // user profile action routes
+    Route::put('profile/update-profile', [AccountController::class, 'update_profile'])->name('account.update-profile');
+    Route::put('profile/update-mpesa', [AccountController::class, 'update_mpesa'])->name('account.update-mpesa');
+    Route::put('profile/update-address', [AccountController::class, 'update_address'])->name('account.update-address');
 });
 
 // buyer account routes
 Route::group(['middleware' => ['buyer', 'auth', 'prevent-back-history', 'verified']], function(){
+    Route::get('buyer/profile', [BuyerController::class, 'profile'])->name('buyer.profile');
+    Route::get('profile/activate-vendor', [BuyerController::class, 'activate_vendor'])->name('buyer.activate-vendor');
 
-
-
+    Route::get('vendor/permit-upload', [VendorController::class, 'check_permit'])->name('vendor.check-permit');
+    Route::post('vendor/upload-permit', [VendorController::class, 'upload_permit'])->name('vendor.upload-permit');
 });
 
 // vendor account routes
 Route::group(['middleware' => ['vendor', 'auth', 'prevent-back-history', 'verified']], function(){
-
+    Route::get('vendor/profile', [VendorController::class, 'profile'])->name('vendor.profile');
+    Route::get('profile/activate-buyer', [VendorController::class, 'activate_buyer'])->name('vendor.activate-buyer');
+    Route::get('vendor/products', [VendorController::class, 'products'])->name('vendor.products');
+    Route::get('product/edit', [VendorController::class, 'edit_product'])->name('edit_product');
 
 });
 
