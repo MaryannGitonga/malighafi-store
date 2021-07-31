@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+    <div class="px-4 py-6 sm:px-0">
 <div class="min-h-screen flex  justify-center py-12 px-4 sm:px-6 lg:px-8 -mt-10">
     @if ($message = Session::get('info'))
         <div class="mt-8 space-y-6 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative" role="alert">
@@ -66,6 +68,8 @@
                 </a>
             </div>
         </form>
+    </div>
+</div>
     </div>
 </div>
 @endsection
