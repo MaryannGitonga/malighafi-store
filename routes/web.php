@@ -4,6 +4,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\VendorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 
 Route::get('/', function () {
     return view('auth.login');
@@ -56,6 +58,3 @@ Route::group(['middleware' => ['admin', 'auth', 'prevent-back-history', 'verifie
 });
 
 require __DIR__.'/auth.php';
-// Route::get('/', function () {
-//     return view('welcome');
-// });
