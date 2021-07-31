@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductRequest;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -17,9 +18,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-         $products = DB::table('products')
-        ->get();
-        return view('view-products', compact('products'));
+        $products = Product::all();
+
+        return view('products.index', compact('products'));
     }
 
     /**
@@ -30,7 +31,7 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('upload-product',compact('categories'));
+        return view('products.create',compact('categories'));
     }
 
     /**
@@ -39,15 +40,9 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        $request->validate([
-            'name' => ['required'],
-            'description' => ['required'],
-            'price' => ['required'],
-            'category' => ['required'],
-            'path' => ['required','mimes:jpg,jpeg,gif,png,pdf']
-        ]);
+        $request->validated();
 
         $product_model = new Product;
 
@@ -60,7 +55,7 @@ class ProductController extends Controller
             $product_model->price = $request->price;
             $product_model->category_id = $request->category;
             $product_model->path = '/storage/' . $file_path;
-            $product_model->units = $request->units;
+            $product_model->unit_id = $request->unit_id;
 
             $product_model->save();
             return redirect()->route('products.index')->with('success','Product created successfully.');
@@ -88,7 +83,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('edit-image',compact('product'));
+        return view('products.edit',compact('product'));
 
     }
 
@@ -99,27 +94,19 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Product $product)
+    public function update(ProductRequest $request, Product $product)
     {
-        $request->validate([
-            'name' => ['required'],
-            'description' => ['required'],
-            'price' => ['required']
+        $validated = $request->validated();
+
+
+        $product->update([
+            'name'=> $validated['name'],
+            'description'=> $validated['description'],
+            'price'=> $validated['price'],
+            'unit_id'=> $validated['unit_id']
         ]);
 
-
-            // $file_name = time().'_'.$request->file('path')->getClientOriginalName();
-            // $file_path = $request->file('path')->storeAs('post-uploads', $file_name, 'public');
-
-
-            $product->update(['name'=> $request->name]);
-            $product->update(['description'=> $request->description]);
-            $product->update(['price'=> $request->price]);
-            $product->update(['units'=> $request->units]);
-
-            return redirect()->route('products.index');
-
-
+        return redirect()->route('products.index')->with('success', 'Product updated successfully');
 
     }
 
@@ -133,6 +120,7 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
+
         return redirect()->route('products.index');
     }
 

@@ -16,19 +16,19 @@ class CategorySeeder extends Seeder
     {
        DB::table('categories')->insert([
            [
-            'category' => 'food'
+            'name' => 'food'
            ],
 
            [
-            'category' => 'chemicals'
+            'name' => 'chemicals'
            ],
 
            [
-            'category' => 'natural extract'
+            'name' => 'natural extract'
            ],
 
            [
-            'category' => 'metals'
+            'name' => 'metals'
            ]
 
        ]);
