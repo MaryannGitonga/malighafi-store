@@ -25,8 +25,8 @@ class CreateUsersTable extends Migration
             $table->string('postal_address')->nullable();
             $table->string('zip_code')->nullable();
             $table->string('county')->nullable();
-            $table->string('kra_pin')->nullable();
-            $table->string('permit_no')->nullable();
+            $table->string('kra_pin')->unique()->nullable();
+            $table->string('permit_no')->unique()->nullable();
             $table->string('permit_upload_path')->nullable();
             $table->string('mpesa_no')->nullable();
             $table->rememberToken();

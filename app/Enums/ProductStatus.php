@@ -11,8 +11,8 @@ use BenSampo\Enum\Enum;
  */
 final class ProductStatus extends Enum
 {
-    const Declined = 0;
-    const Pending =   2;
-    const Approved = 1;
+    const Declined = 'declined';
+    const Pending =  'pending';
+    const Approved = 'approved';
 
 }

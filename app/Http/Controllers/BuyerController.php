@@ -17,7 +17,7 @@ class BuyerController extends Controller
         return view('buyer.profile', compact('user'));
     }
 
-    public function activate_vendor(Request $request)
+    public function activate_seller(Request $request)
     {
         $user = $request->user();
 
@@ -32,12 +32,12 @@ class BuyerController extends Controller
         // if vendor account doesn't exists, create an instance
         if(DB::table('role_user')
         ->where('user_id', $user->id)
-        ->where('role_id', UserType::Vendor)
+        ->where('role_id', UserType::Seller)
         ->doesntExist())
         {
             DB::table('role_user')->insert([
                 'user_id' => $user->id,
-                'role_id' => UserType::Vendor,
+                'role_id' => UserType::Seller,
                 'status' => AccountStatus::Active
             ]);
         }
@@ -45,12 +45,12 @@ class BuyerController extends Controller
         // Otherwise
         DB::table('role_user')
             ->where('user_id', $user->id)
-            ->where('role_id', UserType::Vendor)
+            ->where('role_id', UserType::Seller)
             ->update([
             'status' => AccountStatus::Active
         ]);
 
-        return redirect()->route('vendor.profile');
+        return redirect()->route('seller.profile');
     }
 
 }

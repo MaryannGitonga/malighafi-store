@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Malighafi Store') }} - @yield('page-title')</title>
+        <title>{{ config('app.name', 'Malighafi Store') }}</title>
 
         <link rel="icon" href="{{ asset('images/logo.png') }}">
 
@@ -27,7 +27,8 @@
         <script src="{{ asset('js/app.js') }}" defer></script>
 
         <!-- CSRF Token -->
-   <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        @laravelViewsStyles
     </head>
     <body class="font-sans antialiased" x-data="{
         modal: false,
@@ -43,5 +44,6 @@
                 @yield('content')
             </main>
         </div>
+        @laravelViewsScripts
     </body>
 </html>

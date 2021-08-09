@@ -7,8 +7,8 @@
 @keydown.escape="isDialogOpen = false">
 
 <div x-show="isDialogOpen"
-:class="{ 'absolute inset-0 z-10 flex items-start justify-center': isDialogOpen }">
-<div class="relative z-10 inset-0 overflow-y-auto mt-60" x-show="isDialogOpen"
+:class="{ 'absolute inset-0 z-10 flex items-start justify-center': isDialogOpen }" class="-mt-60">
+<div class="relative z-10 inset-0 overflow-y-auto sm:-mt-40 md:-mt-40" x-show="isDialogOpen"
 @click.away="isDialogOpen = false">
     <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
 
@@ -39,7 +39,7 @@
           </div>
         </div>
         <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-          <a href="{{ route('vendor.check-permit') }}" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm">
+          <a href="{{ route('seller.check-permit') }}" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm">
             Switch
           </a>
           <button type="button" @click="isDialogOpen = false" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
@@ -73,9 +73,31 @@
 </div>
         <div class="lg:w-3/4 mt-12 lg:mt-0">
             @if ($message = Session::get('success'))
-            <div class="mt-8 space-y-6 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative mb-4" role="alert">
-                <p>{{ $message }}</p>
-            </div>
+                <div x-data='{ open: true }' class="fixed z-50 bottom-0 left-0 w-full p-4 md:w-1/2 md:top-0 md:bottom-auto md:right-0 md:p-8 md:left-auto xl:w-1/3 h-auto rounded">
+                    <div class="bg-white rounded p-4 flex items-center shadow-lg h-auto border-gray-200 border" x-show='open'>
+                    <div class=" mr-4 rounded-full p-2">
+                        <div class=" rounded-full p-1 border-2">
+                        <i data-feather="check-circle" class="text-sm w-4 h-4 font-semibold"></i>
+                        </div>
+                    </div>
+
+                    <div class="flex-1">
+                        <b class="text-gray-900 font-semibold">
+                            Successful!
+                        </b>
+                        <div class="text-sm" >
+                            <x-lv-alert onClose='open = false'>
+                                <div>{{ $message }}</div>
+                            </x-lv-alert>
+                        </div>
+                    </div>
+
+                    {{-- Flush this message from the session --}}
+                    <button @click.prevent="{{ $onClose ?? ''}}" class="text-gray-400 hover:text-gray-900 transition duration-300 ease-in-out cursor-pointer">
+                        <i data-feather="x-circle"></i>
+                    </button>
+                    </div>
+                </div>
             @endif
             <div class="bg-grey-light py-10 px-6 sm:px-10 mb-6 rounded-lg">
                 <h1 class="font-hkbold text-secondary text-2xl sm:text-left mb-12">Account Details</h1>
@@ -83,7 +105,7 @@
                 @csrf
                 @method('PUT')
                     <div class="mb-12">
-                        <img src="{{ $user->profile_photo_path != null ? Storage::url($user->profile_photo_path) : asset('images/avatar.png') }}" onerror="{{ asset('images/avatar.png') }}"
+                        <img src="{{ $user->profile_photo_path != null ? asset($user->profile_photo_path) : asset('images/avatar.png') }}" onerror="{{ asset('images/avatar.png') }}"
                         alt="user profile image"
                         class="object-cover h-40 w-40 rounded-full overflow-hidden"/>
 

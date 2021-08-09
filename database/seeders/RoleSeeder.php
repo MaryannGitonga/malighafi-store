@@ -20,7 +20,7 @@ class RoleSeeder extends Seeder
                 'role' => UserType::Administrator
             ],
             [
-                'role' => UserType::Vendor
+                'role' => UserType::Seller
             ],
             [
                 'role' => UserType::Buyer

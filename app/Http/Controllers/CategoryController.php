@@ -15,9 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-
-        return view('categories.index', compact('categories'));
+        return view('categories.index');
     }
 
     /**
@@ -84,7 +82,7 @@ class CategoryController extends Controller
             'name' => $validated['name']
         ]);
 
-        return redirect()->route('categories.show', $category)->with('success', 'Category updated successfully');
+        return redirect()->route('categories.index')->with('success', 'Category updated successfully');
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\AccountStatus;
 use App\Enums\UserType;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -19,7 +20,33 @@ class RoleUserSeeder extends Seeder
             [
                 'user_id' => 1,
                 'role_id' => UserType::Administrator,
-            ]
+                'status' => AccountStatus::Active
+            ],
+            [
+                'user_id' => 2,
+                'role_id' => UserType::Buyer,
+                'status' => AccountStatus::Active
+            ],
+            [
+                'user_id' => 3,
+                'role_id' => UserType::Buyer,
+                'status' => AccountStatus::Active
+            ],
+            [
+                'user_id' => 3,
+                'role_id' => UserType::Seller,
+                'status' => AccountStatus::Disabled
+            ],
+            [
+                'user_id' => 4,
+                'role_id' => UserType::Buyer,
+                'status' => AccountStatus::Disabled
+            ],
+            [
+                'user_id' => 4,
+                'role_id' => UserType::Seller,
+                'status' => AccountStatus::Active
+            ],
         ));
     }
 }

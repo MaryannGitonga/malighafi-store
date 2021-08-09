@@ -1,10 +1,15 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BuyerController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\VendorController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SellerController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,7 +29,7 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => ['auth', 'prevent-back-history', 'verified']], function(){
-    Route::get('home', [HomeController::class, 'create'])->name('home');
+    Route::get('home', [HomeController::class, 'index'])->name('home');
 
     // user profile action routes
     Route::put('profile/update-profile', [AccountController::class, 'update_profile'])->name('account.update-profile');
@@ -35,24 +40,28 @@ Route::group(['middleware' => ['auth', 'prevent-back-history', 'verified']], fun
 // buyer account routes
 Route::group(['middleware' => ['buyer', 'auth', 'prevent-back-history', 'verified']], function(){
     Route::get('buyer/profile', [BuyerController::class, 'profile'])->name('buyer.profile');
-    Route::get('profile/activate-vendor', [BuyerController::class, 'activate_vendor'])->name('buyer.activate-vendor');
+    Route::get('profile/activate-seller', [BuyerController::class, 'activate_seller'])->name('buyer.activate-seller');
 
-    Route::get('vendor/permit-upload', [VendorController::class, 'check_permit'])->name('vendor.check-permit');
-    Route::post('vendor/upload-permit', [VendorController::class, 'upload_permit'])->name('vendor.upload-permit');
+    Route::get('seller/permit-upload', [SellerController::class, 'check_permit'])->name('seller.check-permit');
+    Route::post('seller/upload-permit', [SellerController::class, 'upload_permit'])->name('seller.upload-permit');
 });
 
-// vendor account routes
-Route::group(['middleware' => ['vendor', 'auth', 'prevent-back-history', 'verified']], function(){
-    Route::resource('products', ProductController::class);
-
-    Route::get('vendor/profile', [VendorController::class, 'profile'])->name('vendor.profile');
-    Route::get('profile/activate-buyer', [VendorController::class, 'activate_buyer'])->name('vendor.activate-buyer');
-});
-
-// admin account routes
+// admin/ seller account routes
 Route::group(['middleware' => ['admin', 'auth', 'prevent-back-history', 'verified']], function(){
+    // General Routes
     Route::resource('categories', CategoryController::class);
     Route::resource('products', ProductController::class);
+    Route::resource('orders', OrderController::class);
+    Route::resource('roles', RoleController::class);
+
+    // Admin routes
+    Route::get('admin/profile', [AdminController::class, 'profile'])->name('admin.profile');
+    Route::resource('users', UserController::class);
+
+    // Seller routes
+    Route::get('seller/profile', [SellerController::class, 'profile'])->name('seller.profile');
+    Route::get('profile/activate-buyer', [SellerController::class, 'activate_buyer'])->name('seller.activate-buyer');
+
 });
 
 require __DIR__.'/auth.php';

@@ -23,9 +23,13 @@ class Admin
             ->where('user_id', $request->user()->id)
             ->where('role_id', UserType::Administrator)
             ->where('status', AccountStatus::Active)
-            ->doesntExist()){
-                return back();
+            ->exists() || DB::table('role_user')
+            ->where('user_id', $request->user()->id)
+            ->where('role_id', UserType::Seller)
+            ->where('status', AccountStatus::Active)
+            ->exists()){
+                return $next($request);
         }
-        return $next($request);
+        return back();
     }
 }

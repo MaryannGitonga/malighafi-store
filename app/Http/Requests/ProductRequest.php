@@ -23,7 +23,7 @@ class ProductRequest extends FormRequest
         ->where('status', AccountStatus::Active)
         ->exists() || DB::table('role_user')
         ->where('user_id', Auth::user()->id)
-        ->where('role_id', UserType::Vendor)
+        ->where('role_id', UserType::Seller)
         ->where('status', AccountStatus::Active)
         ->exists();
     }
@@ -39,7 +39,8 @@ class ProductRequest extends FormRequest
             'name' => '',
             'description' => '',
             'price' => '',
-            'category' => '',
+            'category_id' => '',
+            'unit_id' => '',
             'path' => 'mimes:jpg,jpeg,gif,png,pdf'
         ];
     }

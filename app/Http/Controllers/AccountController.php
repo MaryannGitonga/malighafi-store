@@ -26,7 +26,7 @@ class AccountController extends Controller
             $file_name = time().'_'.$request->file('profile_photo')->getClientOriginalName();
             $file_path = $request->file('profile_photo')->storeAs('profile_photos', $file_name, 'public');
 
-            $request->user()->profile_photo_path = $file_path;
+            $request->user()->profile_photo_path = '/storage/' . $file_path;
         }
 
         // save user instance

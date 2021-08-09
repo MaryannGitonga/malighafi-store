@@ -21,8 +21,9 @@ class CreateProductsTable extends Migration
             $table->decimal('price', 10, 2);
             $table->foreignId('category_id')->constrained();
             $table->foreignId('unit_id')->constrained();
+            $table->foreignId('seller_id')->constrained('users');
             $table->string('path');
-            $table->tinyInteger('status')->unsigned()->default(ProductStatus::Pending);
+            $table->string('status')->default(ProductStatus::Pending);
             $table->softDeletes();
             $table->timestamps();
         });
