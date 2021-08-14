@@ -57,6 +57,6 @@ class RegisteredUserController extends Controller
         $user->sendEmailVerificationNotification();
 
         // Redirect user to email verification notice view
-        return redirect(RouteServiceProvider::VERIFICATION_NOTICE);
+        return redirect()->route('verification.notice');
     }
 }

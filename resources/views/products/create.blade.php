@@ -25,6 +25,11 @@
                   name="name" placeholder="Product Name" value="" type="text"
                 />
               </label>
+                @error('name')
+                    <div class=" mt-8 space-y-6 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </div>
+                @enderror
               <label class="block text-md">
                 <span class="text-gray-700 dark:text-gray-400">Price</span>
                 <input
@@ -32,6 +37,11 @@
                   name="price" placeholder="Product Price" value="" type="number"
                 />
               </label>
+                @error('price')
+                    <div class=" mt-8 space-y-6 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </div>
+                @enderror
               <label class="block mt-4 text-md">
                 <span class="text-gray-700 dark:text-gray-400">
                   Category
@@ -44,6 +54,11 @@
                 @endforeach
                 </select>
               </label>
+                @error('category_id')
+                    <div class=" mt-8 space-y-6 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </div>
+                @enderror
               <div class="mt-4 text-md">
                 <span class="text-gray-700 dark:text-gray-400">
                   Unit of Measurement
@@ -64,6 +79,11 @@
                     </div>
                 @endforeach
               </div>
+                @error('unit_id')
+                    <div class=" mt-8 space-y-6 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </div>
+                @enderror
               <label class="block mt-4 text-md">
                 <span class="text-gray-700 dark:text-gray-400">Description</span>
                 <textarea
@@ -72,6 +92,11 @@
                   placeholder="Product Description"
                 ></textarea>
               </label>
+                @error('description')
+                    <div class=" mt-8 space-y-6 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </div>
+                @enderror
               <label class="block text-md">
                 <span class="text-gray-700 dark:text-gray-400">Image</span>
                 <input
@@ -79,6 +104,11 @@
                   placeholder="Product Image" type="file" name="path"
                 />
               </label>
+                @error('path')
+                    <div class=" mt-8 space-y-6 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </div>
+                @enderror
               @if (Auth::user()->roles()->where('role_id', App\Enums\UserType::Administrator)->first() != null)
                   @if (Auth::user()->roles()->where('role_id', App\Enums\UserType::Administrator)->first()->pivot->status == App\Enums\AccountStatus::Active)
                     <label class="block mt-4 text-md">
@@ -92,7 +122,12 @@
                     <option value="{{ $seller['id']}}">{{ $seller['name'] }}</option>
                     @endforeach
                     </select>
-                </label>
+                    </label>
+                    @error('name')
+                        <div class=" mt-8 space-y-6 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </div>
+                    @enderror
               @endif
               @endif
               <div class="flex items-center justify-start mt-8">

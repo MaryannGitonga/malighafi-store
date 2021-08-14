@@ -30,6 +30,11 @@
                   name="name" placeholder="Category Name" value="{{ $category->name }}"
                 />
               </label>
+                @error('name')
+                    <div class=" mt-8 space-y-6 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </div>
+                @enderror
               <div class="flex items-center justify-start mt-8">
                 <button type="submit" class="group relative w-60 flex justify-center py-2 px-4 border border-transparent text-md font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                     Edit Category

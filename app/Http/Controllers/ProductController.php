@@ -68,7 +68,7 @@ class ProductController extends Controller
             $product_model->category_id = $request->category_id;
             $product_model->path = '/storage/' . $file_path;
             $product_model->unit_id = $request->unit_id;
-            $product_model->seller_id = ($request->user()->roles()->where('role_id', UserType::Administrator)->first() != null) ? $request->seller_id : $request->user();
+            $product_model->seller_id = ($request->user()->roles()->where('role_id', UserType::Administrator)->first() != null) ? $request->seller_id : $request->user()->id;
 
             $product_model->save();
             return redirect()->route('products.index')->with('success','Product created successfully.');

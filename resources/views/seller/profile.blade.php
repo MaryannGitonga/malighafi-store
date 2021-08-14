@@ -7,8 +7,8 @@
 @keydown.escape="isDialogOpen = false">
 
 <div x-show="isDialogOpen"
-:class="{ 'absolute inset-0 z-10 flex items-start justify-center': isDialogOpen }">
-<div class="relative z-10 inset-0 overflow-y-auto lg:-mt-80 sm:-mt-40 md:-mt-40" x-show="isDialogOpen"
+:class="{ 'absolute inset-0 z-10 flex items-start justify-center': isDialogOpen }" class="-mt-60">
+<div class="relative z-10 inset-0 overflow-y-auto sm:-mt-40 md:-mt-40" x-show="isDialogOpen"
 @click.away="isDialogOpen = false">
     <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
 
