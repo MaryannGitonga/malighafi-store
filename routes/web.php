@@ -1,10 +1,9 @@
 <?php
 
 use App\Http\Controllers\AccountController;
-use App\Http\Controllers\Auth\EmailVerificationPromptController;
-use App\Http\Controllers\Auth\NewPasswordController;
-use App\Http\Controllers\BuyerController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\VendorController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 
 Route::get('/', function () {
     return view('auth.login');
@@ -47,8 +47,14 @@ Route::group(['middleware' => ['buyer', 'auth', 'prevent-back-history', 'verifie
 
 // vendor account routes
 Route::group(['middleware' => ['vendor', 'auth', 'prevent-back-history', 'verified']], function(){
+    Route::resource('products', ProductController::class);
 
+});
 
+// admin account routes
+Route::group(['middleware' => ['admin', 'auth', 'prevent-back-history', 'verified']], function(){
+    Route::resource('categories', CategoryController::class);
+    Route::resource('products', ProductController::class);
 });
 
 require __DIR__.'/auth.php';

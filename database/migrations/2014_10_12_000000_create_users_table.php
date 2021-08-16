@@ -30,6 +30,7 @@ class CreateUsersTable extends Migration
             $table->string('permit_upload_path')->nullable();
             $table->string('mpesa_no')->nullable();
             $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

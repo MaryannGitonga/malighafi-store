@@ -6,16 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Role extends Model
+class Category extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = [
-        'role',
+    protected $fillable =[
+        'name',
     ];
 
-    public function users()
+    public function products()
     {
-        return $this->belongsToMany(User::class);
+        return $this->hasMany(Product::class);
     }
 }
