@@ -33,7 +33,7 @@
             </div>
             <a href="/">
                 <div class="h-auto flex items-center logo {{ Auth::user() == null ? "mr-48 pr-64" : (Auth::user()->roles()->where('role_id', App\Enums\UserType::Administrator)->first() != null ? "mr-4 pr-2" : "")}}">
-                    <h1 class="{{ route('home') }}" style="font-family: 'Source Sans Pro', sans-serif; color: #5a67da; font-size: 50px">Malighafi Store</h1>
+                    <h1 style="font-family: 'Source Sans Pro', sans-serif; color: #5a67da;" class="lg:text-5xl md:text-4xl sm:text-2xl">Malighafi Store</h1>
                 </div>
             </a>
             @auth
@@ -289,7 +289,7 @@
 
 <div class="fixed inset-x-0 pt-20 md:top-28 z-50 opacity-0 pointer-events-none transition-all "
      :class="{ 'opacity-100 pointer-events-auto': mobileMenu }">
-    <div class="w-full sm:w-1/2 absolute left-0 top-0 px-6 z-40 bg-white shadow-sm">
+    <div class="w-full  absolute left-0 top-0 px-6 z-40 bg-white shadow-sm">
         @guest
             <a href="{{ route('home') }}"
                 class="w-full py-3 cursor-pointer font-hk font-medium text-secondary border-b border-grey-dark block ">Home

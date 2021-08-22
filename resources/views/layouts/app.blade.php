@@ -14,6 +14,7 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/styles/styles.css') }}">
         <link rel="stylesheet" href="{{ asset('npm/boxicons_2.0.5/css/boxicons.min.css') }}"/>
         <link rel="stylesheet" href="{{ asset('assets/styles/fonts.css') }}" media="screen"/>
         <link rel="stylesheet" href="{{ asset('assets/styles/main.min.css') }}" media="screen"/>

@@ -30,6 +30,7 @@ Route::get('/', function () {
 
 Route::group(['middleware' => ['auth', 'prevent-back-history', 'verified']], function(){
     Route::get('home', [HomeController::class, 'index'])->name('home');
+    Route::get('products/{product}', [ProductController::class, 'show'])->name('products.show');
 
     // user profile action routes
     Route::put('profile/update-profile', [AccountController::class, 'update_profile'])->name('account.update-profile');
@@ -50,9 +51,14 @@ Route::group(['middleware' => ['buyer', 'auth', 'prevent-back-history', 'verifie
 Route::group(['middleware' => ['admin', 'auth', 'prevent-back-history', 'verified']], function(){
     // General Routes
     Route::resource('categories', CategoryController::class);
-    Route::resource('products', ProductController::class);
     Route::resource('orders', OrderController::class);
     Route::resource('roles', RoleController::class);
+    Route::get('products', [ProductController::class, 'index'])->name('products.index');
+    Route::get('products/create', [ProductController::class, 'create'])->name('products.create');
+    Route::post('products', [ProductController::class, 'store'])->name('products.store');
+    Route::get('products/edit/{product}', [ProductController::class, 'edit'])->name('products.edit');
+    Route::put('products/{product}', [ProductController::class, 'update'])->name('products.update');
+    Route::delete('products/{product}', [ProductController::class, 'delete'])->name('products.delete');
 
     // Admin routes
     Route::get('admin/profile', [AdminController::class, 'profile'])->name('admin.profile');

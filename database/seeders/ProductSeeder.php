@@ -23,7 +23,7 @@ class ProductSeeder extends Seeder
                 'category_id' => 3,
                 'unit_id' => 2,
                 'seller_id' => 3,
-                'path' => 'raw-material.jpg',
+                'path' => 'storage/post_uploads/raw-material.jpg',
                 'status' => ProductStatus::Pending
             ],
             [
@@ -33,7 +33,7 @@ class ProductSeeder extends Seeder
                 'category_id' => 3,
                 'unit_id' => 2,
                 'seller_id' => 4,
-                'path' => 'raw-material.jpg',
+                'path' => 'storage/post_uploads/raw-material.jpg',
                 'status' => ProductStatus::Pending
             ],
         ]);

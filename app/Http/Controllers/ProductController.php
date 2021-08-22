@@ -66,7 +66,7 @@ class ProductController extends Controller
             $product_model->description = $request->description;
             $product_model->price = $request->price;
             $product_model->category_id = $request->category_id;
-            $product_model->path = '/storage/' . $file_path;
+            $product_model->path = 'storage/post_uploads' . $file_path;
             $product_model->unit_id = $request->unit_id;
             $product_model->seller_id = ($request->user()->roles()->where('role_id', UserType::Administrator)->first() != null) ? $request->seller_id : $request->user()->id;
 
@@ -83,9 +83,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Product $product)
     {
-        //
+        return view('products.show', compact('product'));
     }
 
     /**
