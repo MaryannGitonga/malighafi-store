@@ -99,7 +99,7 @@
                 Reviews
             </span>
         </div>
-        <div class="tab-content">
+        <div class="tab-content relative">
             <div :class="{ 'active': activeTab=== 'description' }"
                  class="tab-pane bg-grey-light py-10 md:py-16 transition-opacity"
                  role="tabpanel">
