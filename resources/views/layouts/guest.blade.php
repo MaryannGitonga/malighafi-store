@@ -72,9 +72,9 @@
                                 @endif
                             @endauth
                         </div>
-                        <a href="/">
-                            <div class="h-auto flex items-center logo {{ Auth::user() == null ? "mr-48 pr-64" : (Auth::user()->roles()->where('role_id', App\Enums\UserType::Administrator)->first() != null ? "mr-4 pr-2" : "")}}">
-                                <h1 class="{{ route('home') }}" style="font-family: 'Source Sans Pro', sans-serif; color: #5a67da; font-size: 50px">Malighafi Store</h1>
+                        <a href="{{ route('home') }}">
+                            <div class="h-auto flex items-center logo {{ Auth::user() == null ? "lg:mr-48 pr-64" : (Auth::user()->roles()->where('role_id', App\Enums\UserType::Administrator)->first() != null ? "mr-4 pr-2" : "")}}">
+                                <h1 style="font-family: 'Source Sans Pro', sans-serif; color: #5a67da;" class="lg:text-5xl md:text-4xl sm:text-2xl">Malighafi Store</h1>
                             </div>
                         </a>
                         @auth
@@ -136,70 +136,15 @@
                                    class="block text-lg font-hk hover:font-bold transition-all text-secondary hover:text-indigo-500 border-b-2 border-white hover:border-indigo-500 px-2">Home</a>
                             </li>
                             <li class="mr-10">
-                                <a href=""
+                                <a href="{{ route('about') }}"
                                    class="block text-lg font-hk hover:font-bold transition-all text-secondary hover:text-indigo-500 border-b-2 border-white hover:border-indigo-500 px-2">About</a>
                             </li>
-                            <li class="mr-10 hidden lg:block group">
-                                <div class="border-b-2 border-white transition-colors group-hover:border-indigo-500 flex items-center">
-                                    <span class="cursor-pointer text-lg font-hk group-hover:font-bold text-secondary group-hover:text-indigo-500 px-2 transition-all">Shop</span>
-                                    <i class="bx bx-chevron-down text-secondary group-hover:text-indigo-500 pl-2 px-2 transition-colors"></i>
-                                </div>
-                                <div
-                                     class="pt-10 absolute mt-40 top-0 left-0 right-0 z-50 w-2/3 mx-auto opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto ">
-                                    <div class="transition-all flex bg-white shadow-lg p-8 rounded-b relative ">
-                                        <div class="flex-1 relative z-20">
-                                            <h4 class="font-hkbold text-base text-secondary mb-2">Category 1</h4>
-                                            <ul>
-                                                <li>
-                                                    <a href=""
-                                                       class="text-sm font-hk text-secondary-lighter leading-loose border-b border-transparent hover:border-secondary-lighter">Sub Category 1</a>
-                                                </li>
-                                                <li>
-                                                    <a href=""
-                                                       class="text-sm font-hk text-secondary-lighter leading-loose border-b border-transparent hover:border-secondary-lighter">Sub Category 2</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="flex-1 relative z-20">
-                                            <h4 class="font-hkbold text-base text-secondary mb-2">Category 2</h4>
-                                            <ul>
-                                                <li>
-                                                    <a href=""
-                                                       class="text-sm font-hk text-secondary-lighter leading-loose border-b border-transparent hover:border-secondary-lighter">Sub Category 3</a>
-                                                </li>
-                                                <li>
-                                                    <a href=""
-                                                       class="text-sm font-hk text-secondary-lighter leading-loose border-b border-transparent hover:border-secondary-lighter">Sub Category 4</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="flex-1 relative z-20">
-                                            <h4 class="font-hkbold text-base text-secondary mb-2">Category 3</h4>
-                                            <ul>
-                                                <li>
-                                                    <a href=""
-                                                       class="text-sm font-hk text-secondary-lighter leading-loose border-b border-transparent hover:border-secondary-lighter">Sub Category 5</a>
-                                                </li>
-                                                <li>
-                                                    <a href=""
-                                                       class="text-sm font-hk text-secondary-lighter leading-loose border-b border-transparent hover:border-secondary-lighter">Sub category 6</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="flex-1">
-                                            <div class="z-0 bg-contain bg-right-bottom bg-no-repeat absolute inset-0"
-                                                 style="background-image: url({{ asset('images/logo.png') }})">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <li class="mr-10">
+                                <a href="{{ route('shop') }}"
+                                   class="block text-lg font-hk hover:font-bold transition-all text-secondary hover:text-indigo-500 border-b-2 border-white hover:border-indigo-500 px-2">Shop</a>
                             </li>
                             <li class="mr-10">
-                                <a href=""
-                                   class="block text-lg font-hk hover:font-bold transition-all text-secondary hover:text-indigo-500 border-b-2 border-white hover:border-indigo-500 px-2">FAQ</a>
-                            </li>
-                            <li class="mr-10">
-                                <a href=""
+                                <a href="{{ route('contact') }}"
                                    class="block text-lg font-hk hover:font-bold transition-all text-secondary hover:text-indigo-500 border-b-2 border-white hover:border-indigo-500 px-2">Contact</a>
                             </li>
                         </ul>
@@ -223,57 +168,13 @@
                         <a href="{{ route('home') }}"
                             class="w-full py-3 cursor-pointer font-hk font-medium text-secondary border-b border-grey-dark block ">Home
                         </a>
-                        <a href=""
+                        <a href="{{ route('about') }}"
                             class="w-full py-3 cursor-pointer font-hk font-medium text-secondary border-b border-grey-dark block">About
                         </a>
-                        <div class="w-full py-3 border-b border-grey-dark block"
-                            x-data="{
-                                isParentAccordionOpen: false
-                            }">
-                            <div class="flex items-center justify-between"
-                                @click="isParentAccordionOpen = !isParentAccordionOpen">
-                                <span class="font-hk font-medium block transition-colors"
-                                    :class="isParentAccordionOpen ? 'text-indigo-500' : 'text-secondary'">Shop</span>
-                                <i class="bx text-secondary text-xl"
-                                    :class="isParentAccordionOpen ? 'bx-chevron-down' : 'bx-chevron-left'"></i>
-                            </div>
-                            <div class="transition-all"
-                                :class="isParentAccordionOpen ? 'max-h-infinite' : 'max-h-0 overflow-hidden'">
-                                <div x-data="{
-                                    isAccordionOpen: false
-                                }">
-                                    <div class="flex items-center pt-3"
-                                        @click="isAccordionOpen = !isAccordionOpen">
-                                        <i class="bx text-xl pr-3 transition-colors"
-                                            :class="isAccordionOpen ? 'bx-chevron-down text-secondary' : 'bx-chevron-right text-grey-darkest'"></i>
-                                        <a href=""
-                                            class="font-hk font-medium transition-colors"
-                                            :class="isAccordionOpen ? 'text-indigo-500' : 'text-grey-darkest'">Category 1</a>
-                                    </div>
-                                    <div class="pl-12 transition-all"
-                                        :class="isAccordionOpen ? 'max-h-infinite' : 'max-h-0 overflow-hidden'">
-                                        <a href=""
-                                            class="font-hk font-medium text-secondary block mt-2">Sub Category 1</a>
-                                        <a href=""
-                                            class="font-hk font-medium text-secondary block mt-2">Sub Category 2</a>
-                                    </div>
-                                </div>
-                                <div class="flex items-center pt-3">
-                                    <i class="bx bx-chevron-right text-grey-darkest text-xl pr-3"></i>
-                                    <a href=""
-                                        class="font-hk font-medium text-grey-darkest">Category</a>
-                                </div>
-                                <div class="flex items-center pt-3">
-                                    <i class="bx bx-chevron-right text-grey-darkest text-xl pr-3"></i>
-                                    <a href=""
-                                        class="font-hk font-medium text-grey-darkest">Category 3</a>
-                                </div>
-                            </div>
-                        </div>
-                        <a href=""
-                            class="w-full py-3 cursor-pointer font-hk font-medium text-secondary border-b border-grey-dark block">FAQ
+                        <a href="{{ route('shop') }}"
+                        class="w-full py-3 cursor-pointer font-hk font-medium text-secondary border-b border-grey-dark block">Shop
                         </a>
-                        <a href=""
+                        <a href="{{ route('contact') }}"
                             class="w-full py-3 cursor-pointer font-hk font-medium text-secondary border-b border-grey-dark block">Contact
                         </a>
                     <a href="{{ route('login') }}"

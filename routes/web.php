@@ -23,15 +23,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-Route::get('/', function () {
-    return view('auth.login');
-})->name('login');
+Route::get('/', [HomeController::class, 'welcome'])->name('home');
+Route::get('about', [HomeController::class, 'about'])->name('about');
+Route::get('shop', [HomeController::class, 'index'])->name('shop');
+Route::get('products/{product}', [ProductController::class, 'show'])->name('products.show');
+Route::get('faq', [HomeController::class, 'faq'])->name('faq');
+Route::get('contact', [HomeController::class, 'contact'])->name('contact');
 
 Route::group(['middleware' => ['auth', 'prevent-back-history', 'verified']], function(){
-    Route::get('home', [HomeController::class, 'index'])->name('home');
-    Route::get('products/{product}', [ProductController::class, 'show'])->name('products.show');
-
     // user profile action routes
     Route::put('profile/update-profile', [AccountController::class, 'update_profile'])->name('account.update-profile');
     Route::put('profile/update-mpesa', [AccountController::class, 'update_mpesa'])->name('account.update-mpesa');

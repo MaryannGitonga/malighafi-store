@@ -70,54 +70,31 @@
             </div>
             <div class="flex pb-8 group">
                 <a href=""
-                   class="btn btn-outline mr-4 md:mr-6">Add to cart</a>
+                   class="btn btn-outline mr-4 md:mr-6">Add to Wishlist</a>
                 <a href=""
-                   class="btn btn-outline bg-primary text-white hover:bg-white hover:text-primary">BUY NOW</a>
+                   class="btn btn-outline bg-primary text-white hover:bg-white hover:text-primary">Add to Cart</a>
             </div>
             <p class="font-hk text-secondary">
-                <span class="pr-2">Category:</span> {{ Illuminate\Support\Str::of($product->category->name)->ucfirst()}}
+                <span class="pr-2">Category:</span> <span class="font-bold text-primary">{{ Illuminate\Support\Str::of($product->category->name)->ucfirst()}}</span>
             </p>
         </div>
     </div>
     <div class="pb-16 sm:pb-20 md:pb-24"
-         x-data="{ activeTab: 'description' }">
+         x-data="{ activeTab: 'reviews' }">
         <div class="tabs flex flex-col sm:flex-row"
              role="tablist">
-            <span @click="activeTab = 'description'"
+             <span @click="activeTab = 'reviews'"
                   class="tab-item bg-white hover:bg-grey-light px-10 py-5 text-center sm:text-left border-t-2 border-transparent font-hk font-bold  text-secondary cursor-pointer transition-colors"
-                  :class="{ 'active': activeTab=== 'description' }">
-                Description
+                  :class="{ 'active': activeTab=== 'reviews' }">
+                Reviews
             </span>
             <span @click="activeTab = 'additional-information'"
                   class="tab-item bg-white hover:bg-grey-light px-10 py-5 text-center sm:text-left border-t-2 border-transparent font-hk font-bold  text-secondary cursor-pointer transition-colors"
                   :class="{ 'active': activeTab=== 'additional-information' }">
                 Additional Information
             </span>
-            <span @click="activeTab = 'reviews'"
-                  class="tab-item bg-white hover:bg-grey-light px-10 py-5 text-center sm:text-left border-t-2 border-transparent font-hk font-bold  text-secondary cursor-pointer transition-colors"
-                  :class="{ 'active': activeTab=== 'reviews' }">
-                Reviews
-            </span>
         </div>
         <div class="tab-content relative">
-            <div :class="{ 'active': activeTab=== 'description' }"
-                 class="tab-pane bg-grey-light py-10 md:py-16 transition-opacity"
-                 role="tabpanel">
-                <div class="w-5/6 mx-auto text-center sm:text-left">
-                    <div class="font-hk text-secondary text-base">
-                        {{ $product->description }}
-                    </div>
-                </div>
-            </div>
-            <div :class="{ 'active': activeTab=== 'additional-information' }"
-                 class="tab-pane bg-grey-light py-10 md:py-16 transition-opacity"
-                 role="tabpanel">
-                <div class="w-5/6 mx-auto">
-                    <div class="font-hk text-secondary text-base">
-                        {{ $product->description }}
-                    </div>
-                </div>
-            </div>
             <div :class="{ 'active': activeTab=== 'reviews' }"
                  class="tab-pane bg-grey-light py-10 md:py-16 transition-opacity"
                  role="tabpanel">
@@ -208,6 +185,15 @@
                 <div class="w-5/6 mx-auto pt-8 md:pt-10 pb-4 text-center sm:text-left">
                     <a href="/"
                        class="btn btn-outline bg-primary text-white hover:bg-white hover:text-primary">Submit Review</a>
+                </div>
+            </div>
+            <div :class="{ 'active': activeTab=== 'additional-information' }"
+                 class="tab-pane bg-grey-light py-10 md:py-16 transition-opacity"
+                 role="tabpanel">
+                <div class="w-5/6 mx-auto">
+                    <div class="font-hk text-secondary text-base">
+                        {{ $product->description }}
+                    </div>
                 </div>
             </div>
         </div>
