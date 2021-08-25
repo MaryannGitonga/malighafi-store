@@ -24,7 +24,7 @@
 
         <!-- Scripts -->
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-        <script src="{{ asset('js/app.js') }}" defer></script>
+
 
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -45,5 +45,6 @@
             </main>
         </div>
         @laravelViewsScripts
+        @yield('pagescript')
     </body>
 </html>

@@ -1,7 +1,9 @@
 <?php
 
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use APP\Http\Controllers\API\MpesaResponseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::post('validation', [MpesaResponseController::class, 'validation']);
+Route::post('confirmation', [MpesaResponseController::class, 'confirmation']);
+Route::post('stkpush', [MpesaResponseController::class, 'stkPush']);
+Route::post('b2ccallback',[MpesaResponseController::class,'b2cCallback']);
