@@ -107,7 +107,7 @@
                         <i class="bx bxs-star text-primary"></i>
                     </div>
                     <p class="font-hkbold text-secondary text-lg pt-3">Perfect for everyday use</p>
-                    <p class="font-hk text-secondary pt-4 lg:w-5/6 xl:w-2/3">I loooveeeee this product!!! It feels so soft and smells like real leather!!! I ordered this fancy backpack looking for something that can be used at work and, at the same time, after work; and I found it.  Honestly.. Amazing!!</p>
+                    <p class="font-hk text-secondary pt-4 lg:w-5/6 xl:w-2/3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
                     <div class="flex justify-center sm:justify-start items-center pt-3">
                         <p class="font-hk text-grey-darkest text-sm"><span>By</span> Melanie Ashwood</p>
                         <span class="font-hk text-grey-darkest text-sm block px-4">.</span>
@@ -122,70 +122,54 @@
                         <i class="bx bxs-star text-primary"></i>
                         <i class="bx bxs-star text-primary"></i>
                     </div>
-                    <p class="font-hkbold text-secondary text-lg pt-3">Gift for my girlfriend</p>
-                    <p class="font-hk text-secondary pt-4 lg:w-5/6 xl:w-2/3">I paid this thing thinking about my girlfriend’s birthday present, however I had my doubts cuz’ she is kind of picky. But Seriously, from now on, Elyssi is my best friend! She loved it!! She’s crazy about it!  DISCLAIMER: It is smaller than it appears. </p>
+                    <p class="font-hkbold text-secondary text-lg pt-3">Lorem Ipsum</p>
+                    <p class="font-hk text-secondary pt-4 lg:w-5/6 xl:w-2/3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  </p>
                     <div class="flex justify-center sm:justify-start items-center pt-3">
                         <p class="font-hk text-grey-darkest text-sm"><span>By</span> Jake Houston</p>
                         <span class="font-hk text-grey-darkest text-sm block px-4">.</span>
                         <p class="font-hk text-grey-darkest text-sm">4 days ago</p>
                     </div>
                 </div>
-                <form class="w-5/6 mx-auto">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-5 pt-10">
-                        <div class="w-full">
-                            <label class="font-hk text-secondary text-sm block mb-2"
-                                   for="name">Name</label>
-                            <input type="text"
-                                   placeholder="Enter your Name"
-                                   class="form-input"
-                                   id="name"/>
-                        </div>
-                        <div class="w-full pt-10 sm:pt-0">
-                            <label class="font-hk text-secondary text-sm block mb-2"
-                                   for="email">Email address</label>
-                            <input type="email"
-                                   placeholder="Enter your email"
-                                   class="form-input "
-                                   id="email"/>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-5 pt-10">
-                        <div class="w-full">
-                            <label class="font-hk text-secondary text-sm block mb-2"
-                                   for="review_title">Review Title</label>
-                            <input type="text"
-                                   placeholder="Enter your review title"
-                                   class="form-input "
-                                   id="review_title"/>
-                        </div>
-                        <div class="w-full pt-10 sm:pt-0">
-                            <label class="font-hk text-secondary text-sm block mb-2">Rating</label>
-                            <div class="flex pt-4 stars">
-                                <input class="star star-5 bx bxs-star" id="star-5" type="radio" name="star"/>
-                                <label class="star star-5 bx bxs-star" for="star-5"></label>
-                                <input class="star star-4 bx bxs-star" id="star-4" type="radio" name="star"/>
-                                <label class="star star-4 bx bxs-star" for="star-4"></label>
-                                <input class="star star-3 bx bxs-star" id="star-3" type="radio" name="star"/>
-                                <label class="star star-3 bx bxs-star" for="star-3"></label>
-                                <input class="star star-2 bx bxs-star" id="star-2" type="radio" name="star"/>
-                                <label class="star star-2 bx bxs-star" for="star-2"></label>
-                                <input class="star star-1 bx bxs-star" id="star-1" type="radio" name="star"/>
-                                <label class="star star-1 bx bxs-star" for="star-1"></label>
+                @auth
+                    <form class="w-5/6 mx-auto">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-5 pt-10">
+                            <div class="w-full">
+                                <label class="font-hk text-secondary text-sm block mb-2"
+                                    for="review_title">Review Title</label>
+                                <input type="text"
+                                    placeholder="Enter your review title"
+                                    class="form-input "
+                                    id="review_title"/>
+                            </div>
+                            <div class="w-full pt-10 sm:pt-0">
+                                <label class="font-hk text-secondary text-sm block mb-2">Rating</label>
+                                <div class="flex pt-4 stars">
+                                    <input class="star star-5 bx bxs-star" id="star-5" type="radio" name="star"/>
+                                    <label class="star star-5 bx bxs-star" for="star-5"></label>
+                                    <input class="star star-4 bx bxs-star" id="star-4" type="radio" name="star"/>
+                                    <label class="star star-4 bx bxs-star" for="star-4"></label>
+                                    <input class="star star-3 bx bxs-star" id="star-3" type="radio" name="star"/>
+                                    <label class="star star-3 bx bxs-star" for="star-3"></label>
+                                    <input class="star star-2 bx bxs-star" id="star-2" type="radio" name="star"/>
+                                    <label class="star star-2 bx bxs-star" for="star-2"></label>
+                                    <input class="star star-1 bx bxs-star" id="star-1" type="radio" name="star"/>
+                                    <label class="star star-1 bx bxs-star" for="star-1"></label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="sm:w-12/25 pt-10">
-                        <label for="message"
-                               class="font-hk text-secondary text-sm block mb-2">Your Review</label>
-                        <textarea placeholder="Write your review here"
-                                  class="form-textarea h-28"
-                                  id="message"></textarea>
-                    </div>
-                </form>
-                <div class="w-5/6 mx-auto pt-8 md:pt-10 pb-4 text-center sm:text-left">
-                    <a href="/"
-                       class="btn btn-outline bg-primary text-white hover:bg-white hover:text-primary">Submit Review</a>
-                </div>
+                        <div class="sm:w-12/25 pt-10">
+                            <label for="message"
+                                class="font-hk text-secondary text-sm block mb-2">Your Review</label>
+                            <textarea placeholder="Write your review here"
+                                    class="form-textarea h-28"
+                                    id="message"></textarea>
+                        </div>
+                        <div class="w-6/6 mx-auto pt-8 md:pt-10 pb-4 text-center sm:text-left">
+                            <button
+                            class="btn btn-outline bg-primary text-white hover:bg-white hover:text-primary">Submit Review</button>
+                        </div>
+                    </form>
+                @endauth
             </div>
             <div :class="{ 'active': activeTab=== 'additional-information' }"
                  class="tab-pane bg-grey-light py-10 md:py-16 transition-opacity"

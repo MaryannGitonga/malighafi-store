@@ -20,7 +20,9 @@ class DatabaseSeeder extends Seeder
             RoleUserSeeder::class,
             CategorySeeder::class,
             UnitSeeder::class,
-            ProductSeeder::class
+            ProductSeeder::class,
+            WishlistItemSeeder::class,
+            InboxMessageSeeder::class
         ]);
     }
 }

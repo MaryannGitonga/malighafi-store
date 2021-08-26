@@ -57,7 +57,9 @@
     <div class="pl-3 flex flex-col">
         <a href="{{ route('seller.profile') }}"
            class="transition-all hover:font-bold hover:text-indigo-500 px-4 py-3 border-l-2 border-indigo-500-lighter hover:border-indigo-500  font-hk font-bold text-indigo-500 border-indigo-500 ">My Account</a>
-        <a @click="isDialogOpen = true" class="transition-all hover:font-bold hover:text-indigo-500 px-4 py-3 border-l-2 border-indigo-500-lighter hover:border-indigo-500  font-hk text-grey-darkest">Switch to Buyer Account</a>
+           <a href=""
+           class="transition-all hover:font-bold hover:text-indigo-500 px-4 py-3 border-l-2 border-indigo-500-lighter hover:border-indigo-500  font-hk text-grey-darkest">My Inbox <span class="font-bold text-xs bg-indigo-500 text-white rounded-full px-1 items-center justify-center">1</span></a>
+           <a @click="isDialogOpen = true" class="transition-all hover:font-bold hover:text-indigo-500 px-4 py-3 border-l-2 border-indigo-500-lighter hover:border-indigo-500  font-hk text-grey-darkest">Switch to Buyer Account</a>
     </div>
     <a href="{{ route('logout') }}" onclick="event.preventDefault();
     document.getElementById('logout-form').submit();"

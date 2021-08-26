@@ -18,7 +18,7 @@
                             class="w-5 sm:w-6 md:w-8 h-5 sm:h-6 md:h-8 hidden group-hover:block"
                             alt="icon search hover"/>
                         </button>
-                        <a href=""
+                        <a href="{{ route('buyer.wishlist') }}"
                             class="border-2 transition-all border-transparent hover:border-indigo-500 rounded-full p-2 sm:p-4 group hidden lg:block">
                             <img src="{{ asset('assets/img/icons/icon-heart.svg') }}"
                                 class="w-5 sm:w-6 md:w-8 h-5 sm:h-6 md:h-8 block group-hover:hidden"
@@ -49,7 +49,7 @@
                                     alt="icon user hover"/>
                             </a>
                             @if (Auth::user()->roles()->where('role_id', App\Enums\UserType::Buyer)->first()->pivot->status == App\Enums\AccountStatus::Active)
-                            <a href=""
+                            <a href="{{ route('buyer.cart') }}"
                             class="hidden lg:block border-2 transition-all border-transparent hover:border-indigo-500 rounded-full p-2 sm:p-4 ml-2 sm:ml-3 md:ml-5 lg:ml-8 group">
                                 <img src="{{ asset('assets/img/icons/icon-cart.svg') }}"
                                     class="w-5 sm:w-6 md:w-8 h-5 sm:h-6 md:h-8 block group-hover:hidden"
@@ -214,10 +214,10 @@
                 <a href="{{ route('contact') }}"
                     class="w-full py-3 cursor-pointer font-hk font-medium text-secondary border-b border-grey-dark block">Contact
                 </a>
-                <a href=""
+                <a href="{{ route('buyer.wishlist') }}"
                     class="w-full py-3 cursor-pointer font-hk font-medium text-secondary border-b border-grey-dark block">My Wishlist
                 </a>
-                <a href=""
+                <a href="{{ route('buyer.cart') }}"
                     class="w-full py-3 cursor-pointer font-hk font-medium text-secondary border-b border-grey-dark block">My Cart
                 </a>
                 @endif
@@ -228,7 +228,7 @@
                     <a href="{{ route('products.index') }}"
                         class="w-full py-3 cursor-pointer font-hk font-medium text-secondary border-b border-grey-dark block ">My Products
                     </a>
-                    <a href=""
+                    <a href="{{ route('buyer.orders') }}"
                         class="w-full py-3 cursor-pointer font-hk font-medium text-secondary border-b border-grey-dark block">My Orders
                     </a>
                 @endif

@@ -58,9 +58,15 @@
     <div class="pl-3 flex flex-col">
         <a href="{{ route('buyer.profile') }}"
            class="transition-all hover:font-bold hover:text-indigo-500 px-4 py-3 border-l-2 border-indigo-500-lighter hover:border-indigo-500  font-hk font-bold text-indigo-500 border-indigo-500 ">My Account</a>
-        <a href=""
+           <a href="{{ route('buyer.inbox') }}"
+           class="transition-all hover:font-bold hover:text-indigo-500 px-4 py-3 border-l-2 border-indigo-500-lighter hover:border-indigo-500  font-hk text-grey-darkest">My Inbox
+           @if (count($messages) != null)
+           <span class="font-bold text-xs bg-indigo-500 text-white rounded-full px-1 items-center justify-center">{{ count($messages) }}</span>
+           @endif
+        </a>
+           <a href="{{ route('buyer.orders') }}"
            class="transition-all hover:font-bold hover:text-indigo-500 px-4 py-3 border-l-2 border-indigo-500-lighter hover:border-indigo-500  font-hk text-grey-darkest ">Orders</a>
-        <a href=""
+        <a href="{{ route('buyer.wishlist') }}"
            class="transition-all hover:font-bold hover:text-indigo-500 px-4 py-3 border-l-2 border-indigo-500-lighter hover:border-indigo-500  font-hk text-grey-darkest ">Wishlist</a>
         <a @click="isDialogOpen = true" class="transition-all hover:font-bold hover:text-indigo-500 px-4 py-3 border-l-2 border-indigo-500-lighter hover:border-indigo-500  font-hk text-grey-darkest">Switch To Vendor Account</a>
     </div>

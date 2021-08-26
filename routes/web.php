@@ -40,6 +40,12 @@ Route::group(['middleware' => ['auth', 'prevent-back-history', 'verified']], fun
 // buyer account routes
 Route::group(['middleware' => ['buyer', 'auth', 'prevent-back-history', 'verified']], function(){
     Route::get('buyer/profile', [BuyerController::class, 'profile'])->name('buyer.profile');
+    Route::get('buyer/wishlist', [BuyerController::class, 'wishlist'])->name('buyer.wishlist');
+    Route::get('buyer/orders', [BuyerController::class, 'orders'])->name('buyer.orders');
+    Route::get('buyer/inbox', [BuyerController::class, 'inbox'])->name('buyer.inbox');
+    Route::get('cart', [BuyerController::class, 'cart'])->name('buyer.cart');
+    Route::get('customer-information', [BuyerController::class, 'checkout_info'])->name('buyer.checkout-info');
+    Route::get('payment', [BuyerController::class, 'payment'])->name('buyer.payment');
     Route::get('profile/activate-seller', [BuyerController::class, 'activate_seller'])->name('buyer.activate-seller');
 
     Route::get('seller/permit-upload', [SellerController::class, 'check_permit'])->name('seller.check-permit');

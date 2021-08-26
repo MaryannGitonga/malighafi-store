@@ -1,15 +1,12 @@
-@props(['avatar', 'title', 'subtitle', 'actions', 'model'])
+@props(['title', 'subtitle', 'actions', 'model'])
 
 <div>
-  <div class="flex items-center space-x-4 ">
-    <div>
-      <img src="{{ $avatar }}" alt="" class="w-12 h-12 rounded-full shadow-inner bg-white object-cover">
-    </div>
+  <div class="flex items-center space-x-4 pt-4">
     <div class="flex-1">
-      <div class="text-sm font-medium text-gray-900">
+      <div class="text-xl font-medium text-indigo-500">
         {{ $title }}
       </div>
-      <div class="text-sm">
+      <div class="text-base font-normal">
         {{ $subtitle }}
       </div>
     </div>
