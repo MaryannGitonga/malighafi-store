@@ -32,16 +32,12 @@
                 <h4 class="font-hk font-bold text-white text-xl pb-8">Contact</h4>
                 <ul class="list-reset">
                     <li class="pb-2 block">
-                        <a href="mailto:test.email0123@elyssi.com"
-                           class="font-hk text-white transition-colors hover:text-primary text-base tracking-wide">test.email0123@elyssi.com</a>
+                        <a href="mailto:info@malighafistore.com"
+                           class="font-hk text-white transition-colors hover:text-primary text-base tracking-wide">info@malighafistore.com</a>
                     </li>
                     <li class="pb-2 block">
                         <a href="tel:0123234222"
                            class="font-hk text-white transition-colors hover:text-primary text-base tracking-wide">0123 234 222</a>
-                    </li>
-                    <li class="pb-2 block">
-                        <a href="https://elyssi.tailwindmade.com/"
-                           class="font-hk text-white transition-colors hover:text-primary text-base tracking-wide">Elyssi</a>
                     </li>
                 </ul>
             </div>
@@ -76,19 +72,15 @@
                 </div>
             </div>
             <div class="text-center lg:text-left">
-                <h4 class="font-hk font-bold text-white text-xl pb-8">Link</h4>
+                <h4 class="font-hk font-bold text-white text-xl pb-8">Links</h4>
                 <ul class="list-reset">
                     <li class="pb-2 block">
-                        <a href="collection-list.html"
+                        <a href=""
                            class="font-hk transition-colors text-white hover:text-primary text-base tracking-wide">Shop</a>
                     </li>
                     <li class="pb-2 block">
-                        <a href="contact.html"
+                        <a href=""
                            class="font-hk transition-colors text-white hover:text-primary text-base tracking-wide">Contact Us</a>
-                    </li>
-                    <li class="pb-2 block">
-                        <a href="single.html"
-                           class="font-hk transition-colors text-white hover:text-primary text-base tracking-wide">Terms & Conditions</a>
                     </li>
                 </ul>
             </div>

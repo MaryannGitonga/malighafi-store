@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <div class="pt-16 pb-24 flex flex-col lg:flex-row justify-between -mx-5">
+    <form class="pt-16 pb-24 flex flex-col lg:flex-row justify-between -mx-5" action="" method="POST">
         <div class="lg:w-1/2 flex flex-col-reverse sm:flex-row-reverse lg:flex-row justify-between px-5">
             <div class="w-full relative pb-5 sm:pb-0">
                 <div class="bg-v-pink border border-grey relative rounded flex items-center justify-center aspect-w-1 aspect-h-1">
@@ -50,7 +50,7 @@
                 <div class="w-2/3 sm:w-5/6 flex"
                      x-data="{ productQuantity: 1 }">
                     <label for="quantity-form"
-                           class="block relative h-0 w-0 overflow-hidden">Quantity form</label>
+                           class="block relative h-0 w-0 overflow-hidden">Quantity</label>
                     <input type="number"
                            id="quantity-form"
                            class="form-input form-quantity rounded-r-none w-16 py-0 px-2 text-center"
@@ -71,14 +71,14 @@
             <div class="flex pb-8 group">
                 <a href=""
                    class="btn btn-outline mr-4 md:mr-6">Add to Wishlist</a>
-                <a href=""
-                   class="btn btn-outline bg-primary text-white hover:bg-white hover:text-primary">Add to Cart</a>
+                <button type="submit"
+                   class="btn btn-outline bg-primary text-white hover:bg-white hover:text-primary">Add to Cart</button>
             </div>
             <p class="font-hk text-secondary">
                 <span class="pr-2">Category:</span> <span class="font-bold text-primary">{{ Illuminate\Support\Str::of($product->category->name)->ucfirst()}}</span>
             </p>
         </div>
-    </div>
+    </form>
     <div class="pb-16 sm:pb-20 md:pb-24"
          x-data="{ activeTab: 'reviews' }">
         <div class="tabs flex flex-col sm:flex-row"
