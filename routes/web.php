@@ -3,10 +3,12 @@
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BuyerController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\UserController;
@@ -30,6 +32,8 @@ Route::get('products/{product}', [ProductController::class, 'show'])->name('prod
 Route::get('faq', [HomeController::class, 'faq'])->name('faq');
 Route::get('contact', [HomeController::class, 'contact'])->name('contact');
 
+Route::resource('reviews',ReviewController::class);
+
 Route::group(['middleware' => ['auth', 'prevent-back-history', 'verified']], function(){
     // user profile action routes
     Route::put('profile/update-profile', [AccountController::class, 'update_profile'])->name('account.update-profile');
@@ -50,6 +54,8 @@ Route::group(['middleware' => ['buyer', 'auth', 'prevent-back-history', 'verifie
 
     Route::get('seller/permit-upload', [SellerController::class, 'check_permit'])->name('seller.check-permit');
     Route::post('seller/upload-permit', [SellerController::class, 'upload_permit'])->name('seller.upload-permit');
+    Route::resource('reviews',ReviewController::class);
+    Route::resource('carts', CartController::class);
 });
 
 // admin/ seller account routes

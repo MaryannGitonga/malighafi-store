@@ -22,7 +22,8 @@ class DatabaseSeeder extends Seeder
             UnitSeeder::class,
             ProductSeeder::class,
             WishlistItemSeeder::class,
-            InboxMessageSeeder::class
+            InboxMessageSeeder::class,
+            ReviewSeeder::class
         ]);
     }
 }

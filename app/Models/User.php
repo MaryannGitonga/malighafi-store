@@ -53,4 +53,8 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class)->withPivot('status');
     }
+
+    public function order(){
+        return $this->hasMany(Order::class);
+    }
 }

@@ -11,6 +11,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\Review;
 
 
 class ProductController extends Controller
@@ -85,7 +86,8 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return view('products.show', compact('product'));
+        $reviews = DB::table('reviews')->where('product_id',$product->id);
+        return view('products.show', compact('product','reviews'));
     }
 
     /**
