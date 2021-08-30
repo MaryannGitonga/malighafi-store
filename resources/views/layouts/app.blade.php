@@ -37,6 +37,7 @@
         <script src="https://code.highcharts.com/modules/accessibility.js"></script>
         @yield('chart-pie')
 
+
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
         @laravelViewsStyles
@@ -56,5 +57,6 @@
             </main>
         </div>
         @laravelViewsScripts
+        @yield('pagescript')
     </body>
 </html>

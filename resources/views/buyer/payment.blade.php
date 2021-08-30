@@ -32,7 +32,7 @@
                 <p class="font-hk text-secondary">Contact</p>
             </div>
             <div class="w-3/5">
-                <p class="font-hk text-secondary">user@user.com</p>
+                <p class="font-hk text-secondary">{{$user_details->email}}</p>
             </div>
             <div class="w-1/5 text-right">
                 <a href="{{ route('buyer.checkout-info') }}"
@@ -44,7 +44,7 @@
                 <p class="font-hk text-secondary">Deliver to</p>
             </div>
             <div class="w-3/5">
-                <p class="font-hk text-secondary">Street Address, City, Postal Address Postal Code</p>
+                <p class="font-hk text-secondary">{{$user_details->physical_address}}</p>
             </div>
             <div class="w-1/5 text-right">
                 <a href="{{ route('buyer.checkout-info') }}"
@@ -59,9 +59,11 @@
             <p class="font-hkbold text-secondary text-base font-bold">MPESA Payment Instructions</p>
             <div class="pt-4 pl-4">
                 <ul style="list-style: disc">
-                    <li>Instruction 1</li>
-                    <li>Instruction 2</li>
-                    <li>Instruction 3</li>
+                    <li>Confirm that your order details and your MPESA Phone Number is correct.</li>
+                    <li>Click "Pay Now"</li>
+                    <li>After a few seconds, MPESA will prompt you to enter your MPESA PIN on your phone</li>
+                    <li>Enter your MPESA PIN to complete the payment</li>
+                    <li>Once your payment is verified, you will be notified.</li>
                 </ul>
             </div>
         </div>
@@ -72,7 +74,7 @@
             <i class="bx bx-chevron-left text-secondary group-hover:text-primary pr-2 text-2xl -mb-1 transition-colors"></i>
             Return to Cart
         </a>
-        <a href=""
+        <a href="{{route('stk',$total_price)}}"
            class="btn btn-outline bg-primary text-white hover:bg-white hover:text-primary">Pay Now</a>
     </div>
 </div>
@@ -80,45 +82,25 @@
         <div class="sm:w-2/3 md:w-1/2 lg:w-1/3 bg-grey-light mt-16 lg:mt-0">
             <div class="p-8">
     <h3 class="font-hkbold text-secondary text-2xl pb-3 text-center sm:text-left">Your Order</h3>
-    <p class="font-hkbold text-secondary uppercase text-center sm:text-left">Products</p>
+    <p class="font-hkbold text-secondary uppercase text-center sm:text-left">PRODUCTS</p>
+    @foreach ($products as $product)
     <div class="mt-5 mb-8">
         <div class="flex items-center mb-5">
             <div class="w-20 relative mr-3 sm:pr-0">
                 <div class="h-20 rounded flex items-center justify-center">
-                    <img src="assets/img/unlicensed/purse-1.png"
+                    <img src="{{asset($product['image'])}}"
                          alt="Beautiful Brown image"
                          class="w-12 h-16 object-cover object-center"/>
                     <span
                           class="font-hk text-white text-xs px-2 leading-none absolute top-0 right-0 bg-primary flex items-center justify-center rounded-full -mt-2 -mr-2 h-6 w-6">2</span>
                 </div>
             </div>
-            <p class="font-hk text-secondary text-lg">Product 1</p>
+            <p class="font-hk text-secondary text-lg">{{$product['name']}}</p>
         </div>
-        <div class="flex items-center mb-5">
-            <div class="w-20 relative mr-3 sm:pr-0">
-                <div class="h-20 rounded flex items-center justify-center">
-                    <img src="assets/img/unlicensed/backpack-2.png"
-                         alt="Woodie Blake image"
-                         class="w-12 h-16 object-cover object-center"/>
-                    <span
-                          class="font-hk text-white text-xs px-2 leading-none absolute top-0 right-0 bg-primary flex items-center justify-center rounded-full -mt-2 -mr-2 h-6 w-6">2</span>
-                </div>
-            </div>
-            <p class="font-hk text-secondary text-lg">Product 2</p>
-        </div>
-        <div class="flex items-center mb-5">
-            <div class="w-20 relative mr-3 sm:pr-0">
-                <div class="h-20 rounded flex items-center justify-center">
-                    <img src="assets/img/unlicensed/watch-4.png"
-                         alt="Princess image"
-                         class="w-12 h-16 object-cover object-center"/>
-                    <span
-                          class="font-hk text-white text-xs px-2 leading-none absolute top-0 right-0 bg-primary flex items-center justify-center rounded-full -mt-2 -mr-2 h-6 w-6">2</span>
-                </div>
-            </div>
-            <p class="font-hk text-secondary text-lg">Product 3</p>
+
         </div>
     </div>
+    @endforeach
     <form>
         <p class="font-hkbold text-secondary pt-1 pb-2">Cart Note</p>
         <p class="font-hk text-secondary text-sm pb-4">Special instructions for us</p>
@@ -132,7 +114,7 @@
     <h4 class="font-hkbold text-secondary pt-1 pb-2">Cart Totals</h4>
     <div class="flex justify-between py-3 border-t-2 border-indigo-500">
         <span class="font-hkbold text-secondary leading-none">Total</span>
-        <span class="font-hkbold text-secondary leading-none">$200</span>
+        <span class="font-hkbold text-secondary leading-none">{{$total_price}}</span>
     </div>
 </div>
         </div>

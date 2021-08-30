@@ -3,14 +3,17 @@
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BuyerController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\MpesaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +33,24 @@ Route::get('faq', [HomeController::class, 'faq'])->name('faq');
 Route::get('contact', [HomeController::class, 'contact'])->name('contact');
 Route::post('search', [HomeController::class, 'search'])->name('search');
 
+Route::resource('reviews',ReviewController::class);
+Route::post('/get-token', [MpesaController::class, 'generateAccessToken']);
+Route::post('/register-urls', [MpesaController::class, 'registerURL']);
+Route::post('/simulate', [MpesaController::class, 'simulateTransaction']);
+
+Route::get('/mpesatest',function() {
+    return view('payment.mpesa');
+});
+Route::get('/stk',function() {
+    return view('payment.stkpush');
+});
+Route::get('/b2c',function() {
+    return view('payment.b2c');
+});
+Route::post('/b2ctransact', [MpesaController::class, 'b2cRequest']);
+
+
+
 Route::group(['middleware' => ['auth', 'prevent-back-history', 'verified']], function(){
     // user profile action routes
     Route::put('profile/update-profile', [AccountController::class, 'update_profile'])->name('account.update-profile');
@@ -47,9 +68,15 @@ Route::group(['middleware' => ['buyer', 'auth', 'prevent-back-history', 'verifie
     Route::get('customer-information', [BuyerController::class, 'checkout_info'])->name('buyer.checkout-info');
     Route::get('payment', [BuyerController::class, 'payment'])->name('buyer.payment');
     Route::get('profile/activate-seller', [BuyerController::class, 'activate_seller'])->name('buyer.activate-seller');
+    Route::get('/delete-cart-item/{product_id}', [CartController::class, 'delete_cart_item']);
+    Route::put('update-cart-user', [CartController::class,'update_user'])->name('cart.update-user');
 
     Route::get('seller/permit-upload', [SellerController::class, 'check_permit'])->name('seller.check-permit');
     Route::post('seller/upload-permit', [SellerController::class, 'upload_permit'])->name('seller.upload-permit');
+    Route::resource('reviews',ReviewController::class);
+    Route::resource('carts', CartController::class);
+    Route::get('/stkpush/{amount}', [MpesaController::class, 'stkPush'])->name('stk');
+
 });
 
 // admin/ seller account routes
@@ -79,5 +106,6 @@ Route::group(['middleware' => ['admin', 'auth', 'prevent-back-history', 'verifie
     Route::get('profile/activate-buyer', [SellerController::class, 'activate_buyer'])->name('seller.activate-buyer');
 
 });
+
 
 require __DIR__.'/auth.php';

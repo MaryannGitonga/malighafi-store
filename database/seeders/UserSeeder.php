@@ -29,6 +29,7 @@ class UserSeeder extends Seeder
                 'permit_approved' => false,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
+                'mpesa_no' => '748335870'
             ],
             [
                 'name' => 'John Doe',
@@ -41,6 +42,7 @@ class UserSeeder extends Seeder
                 'permit_approved' => false,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
+                'mpesa_no' => '748335870'
             ],
             [
                 'name' => 'George Baker',
@@ -53,6 +55,7 @@ class UserSeeder extends Seeder
                 'permit_approved' => true,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
+                'mpesa_no' => '748335870'
             ],
             [
                 'name' => 'Lynn Monroe',
@@ -65,6 +68,7 @@ class UserSeeder extends Seeder
                 'permit_approved' => true,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
+                'mpesa_no' => '748335870'
             ],
 
         ));
