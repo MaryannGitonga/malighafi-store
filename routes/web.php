@@ -51,11 +51,14 @@ Route::group(['middleware' => ['buyer', 'auth', 'prevent-back-history', 'verifie
     Route::get('customer-information', [BuyerController::class, 'checkout_info'])->name('buyer.checkout-info');
     Route::get('payment', [BuyerController::class, 'payment'])->name('buyer.payment');
     Route::get('profile/activate-seller', [BuyerController::class, 'activate_seller'])->name('buyer.activate-seller');
+    Route::get('/delete-cart-item/{product_id}', [CartController::class, 'delete_cart_item']);
+    Route::put('update-cart-user', [CartController::class,'update_user'])->name('cart.update-user');
 
     Route::get('seller/permit-upload', [SellerController::class, 'check_permit'])->name('seller.check-permit');
     Route::post('seller/upload-permit', [SellerController::class, 'upload_permit'])->name('seller.upload-permit');
     Route::resource('reviews',ReviewController::class);
     Route::resource('carts', CartController::class);
+
 });
 
 // admin/ seller account routes

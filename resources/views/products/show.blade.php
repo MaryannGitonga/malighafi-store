@@ -2,7 +2,8 @@
 
 @section('content')
 <div class="container">
-    <form class="pt-16 pb-24 flex flex-col lg:flex-row justify-between -mx-5" action="" method="POST">
+    <form class="pt-16 pb-24 flex flex-col lg:flex-row justify-between -mx-5" action="{{route('carts.store')}}" method="POST">
+        @csrf
         <div class="lg:w-1/2 flex flex-col-reverse sm:flex-row-reverse lg:flex-row justify-between px-5">
             <div class="w-full relative pb-5 sm:pb-0">
                 <div class="bg-v-pink border border-grey relative rounded flex items-center justify-center aspect-w-1 aspect-h-1">
@@ -53,6 +54,7 @@
                            class="block relative h-0 w-0 overflow-hidden">Quantity</label>
                     <input type="number"
                            id="quantity-form"
+                           name="quantity"
                            class="form-input form-quantity rounded-r-none w-16 py-0 px-2 text-center"
                            x-model="productQuantity"
                            min="1"/>
@@ -65,6 +67,9 @@
                               @click="productQuantity> 1 ? productQuantity-- : productQuantity=1">
                             <i class="bx bxs-down-arrow text-xs text-primary pointer-events-none"></i>
                         </span>
+                    </div>
+                    <div class="hidden">
+                        <input type="text" value="{{$product->id}}" name="product">
                     </div>
                 </div>
             </div>
@@ -79,6 +84,34 @@
             </p>
         </div>
     </form>
+    <div class="lg:w-3/4 mt-12 lg:mt-0">
+        @if ($message = Session::get('success'))
+            <div x-data='{ open: true }' class="fixed z-50 bottom-0 left-0 w-full p-4 md:w-1/2 md:top-0 md:bottom-auto md:right-0 md:p-8 md:left-auto xl:w-1/3 h-auto rounded">
+                <div class="bg-white rounded p-4 flex items-center shadow-lg h-auto border-gray-200 border" x-show='open'>
+                <div class=" mr-4 rounded-full p-2">
+                    <div class=" rounded-full p-1 border-2">
+                    <i data-feather="check-circle" class="text-sm w-4 h-4 font-semibold"></i>
+                    </div>
+                </div>
+
+                <div class="flex-1">
+                    <b class="text-gray-900 font-semibold">
+                        Successful!
+                    </b>
+                    <div class="text-sm" >
+                        <x-lv-alert onClose='open = false'>
+                            <div>{{ $message }}</div>
+                        </x-lv-alert>
+                    </div>
+                </div>
+
+                {{-- Flush this message from the session --}}
+                <button @click.prevent="{{ $onClose ?? ''}}" class="text-gray-400 hover:text-gray-900 transition duration-300 ease-in-out cursor-pointer">
+                    <i data-feather="x-circle"></i>
+                </button>
+                </div>
+            </div>
+        @endif
     <div class="pb-16 sm:pb-20 md:pb-24"
          x-data="{ activeTab: 'reviews' }">
         <div class="tabs flex flex-col sm:flex-row"
@@ -98,6 +131,7 @@
             <div :class="{ 'active': activeTab=== 'reviews' }"
                  class="tab-pane bg-grey-light py-10 md:py-16 transition-opacity"
                  role="tabpanel">
+                @foreach ($reviews as $review)
                 <div class="w-5/6 mx-auto border-b border-grey-darker pb-8 text-center sm:text-left">
                     <div class="flex justify-center sm:justify-start items-center pt-3 xl:pt-5">
                         <i class="bx bxs-star text-primary"></i>
@@ -106,37 +140,25 @@
                         <i class="bx bxs-star text-primary"></i>
                         <i class="bx bxs-star text-primary"></i>
                     </div>
-                    <p class="font-hkbold text-secondary text-lg pt-3">Perfect for everyday use</p>
-                    <p class="font-hk text-secondary pt-4 lg:w-5/6 xl:w-2/3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                    <p class="font-hkbold text-secondary text-lg pt-3">{{$review->title}}</p>
+                    <p class="font-hk text-secondary pt-4 lg:w-5/6 xl:w-2/3">{{$review->description}} </p>
                     <div class="flex justify-center sm:justify-start items-center pt-3">
-                        <p class="font-hk text-grey-darkest text-sm"><span>By</span> Melanie Ashwood</p>
+                        <p class="font-hk text-grey-darkest text-sm"><span>By</span> {{App\Models\Review::find($review->user_id)->user->name}}</p>
                         <span class="font-hk text-grey-darkest text-sm block px-4">.</span>
-                        <p class="font-hk text-grey-darkest text-sm">6 days ago</p>
+                        <p class="font-hk text-grey-darkest text-sm">{{$review->reviewed_at}}</p>
                     </div>
                 </div>
-                <div class="w-5/6 mx-auto border-b border-transparent pb-8 text-center sm:text-left">
-                    <div class="flex justify-center sm:justify-start items-center pt-3 xl:pt-5">
-                        <i class="bx bxs-star text-primary"></i>
-                        <i class="bx bxs-star text-primary"></i>
-                        <i class="bx bxs-star text-primary"></i>
-                        <i class="bx bxs-star text-primary"></i>
-                        <i class="bx bxs-star text-primary"></i>
-                    </div>
-                    <p class="font-hkbold text-secondary text-lg pt-3">Lorem Ipsum</p>
-                    <p class="font-hk text-secondary pt-4 lg:w-5/6 xl:w-2/3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  </p>
-                    <div class="flex justify-center sm:justify-start items-center pt-3">
-                        <p class="font-hk text-grey-darkest text-sm"><span>By</span> Jake Houston</p>
-                        <span class="font-hk text-grey-darkest text-sm block px-4">.</span>
-                        <p class="font-hk text-grey-darkest text-sm">4 days ago</p>
-                    </div>
-                </div>
+                @endforeach
+
                 @auth
-                    <form class="w-5/6 mx-auto">
+                    <form class="w-5/6 mx-auto" method="POST" action="{{route('reviews.store')}}">
+                        @csrf
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-5 pt-10">
                             <div class="w-full">
                                 <label class="font-hk text-secondary text-sm block mb-2"
                                     for="review_title">Review Title</label>
                                 <input type="text"
+                                    name="title"
                                     placeholder="Enter your review title"
                                     class="form-input "
                                     id="review_title"/>
@@ -144,15 +166,15 @@
                             <div class="w-full pt-10 sm:pt-0">
                                 <label class="font-hk text-secondary text-sm block mb-2">Rating</label>
                                 <div class="flex pt-4 stars">
-                                    <input class="star star-5 bx bxs-star" id="star-5" type="radio" name="star"/>
+                                    <input class="star star-5 bx bxs-star" id="star-5" type="radio" name="star" value=5>
                                     <label class="star star-5 bx bxs-star" for="star-5"></label>
-                                    <input class="star star-4 bx bxs-star" id="star-4" type="radio" name="star"/>
+                                    <input class="star star-4 bx bxs-star" id="star-4" type="radio" name="star" value=4>
                                     <label class="star star-4 bx bxs-star" for="star-4"></label>
-                                    <input class="star star-3 bx bxs-star" id="star-3" type="radio" name="star"/>
+                                    <input class="star star-3 bx bxs-star" id="star-3" type="radio" name="star" value=3>
                                     <label class="star star-3 bx bxs-star" for="star-3"></label>
-                                    <input class="star star-2 bx bxs-star" id="star-2" type="radio" name="star"/>
+                                    <input class="star star-2 bx bxs-star" id="star-2" type="radio" name="star" value=2>
                                     <label class="star star-2 bx bxs-star" for="star-2"></label>
-                                    <input class="star star-1 bx bxs-star" id="star-1" type="radio" name="star"/>
+                                    <input class="star star-1 bx bxs-star" id="star-1" type="radio" name="star" value=1>
                                     <label class="star star-1 bx bxs-star" for="star-1"></label>
                                 </div>
                             </div>
@@ -161,9 +183,11 @@
                             <label for="message"
                                 class="font-hk text-secondary text-sm block mb-2">Your Review</label>
                             <textarea placeholder="Write your review here"
+                                    name="description"
                                     class="form-textarea h-28"
                                     id="message"></textarea>
                         </div>
+                        <input type="hidden" value="{{$product->id}}" name="product_id">
                         <div class="w-6/6 mx-auto pt-8 md:pt-10 pb-4 text-center sm:text-left">
                             <button
                             class="btn btn-outline bg-primary text-white hover:bg-white hover:text-primary">Submit Review</button>

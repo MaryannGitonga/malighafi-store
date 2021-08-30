@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Review;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class ReviewController extends Controller
 {
@@ -36,21 +37,21 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'user_id' => "required",
-            'product_id' => "required",
-            'description' => "required"
-        ]);
+        // $request->validate([
+        //     'product_id' => "required",
+        //     'description' => "required"
+        // ]);
         $review = new Review;
 
-        $review->user_id = $request->user_id;
+        $review->user_id = Auth::id();
         $review->product_id = $request->product_id;
         $review->title = $request->title;
         $review->description = $request->description;
-        $review->rating = $request->rating;
+        $review->rating = $request->star;
         $review->reviewed_at = Carbon::now();
 
         $review->save();
+        return redirect()->back();
 
     }
 
