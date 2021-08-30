@@ -131,6 +131,7 @@
             <div :class="{ 'active': activeTab=== 'reviews' }"
                  class="tab-pane bg-grey-light py-10 md:py-16 transition-opacity"
                  role="tabpanel">
+                @if (count($reviews) != 0)
                 @foreach ($reviews as $review)
                 <div class="w-5/6 mx-auto border-b border-grey-darker pb-8 text-center sm:text-left">
                     <div class="flex justify-center sm:justify-start items-center pt-3 xl:pt-5">
@@ -143,12 +144,15 @@
                     <p class="font-hkbold text-secondary text-lg pt-3">{{$review->title}}</p>
                     <p class="font-hk text-secondary pt-4 lg:w-5/6 xl:w-2/3">{{$review->description}} </p>
                     <div class="flex justify-center sm:justify-start items-center pt-3">
-                        <p class="font-hk text-grey-darkest text-sm"><span>By</span> {{App\Models\Review::find($review->user_id)->user->name}}</p>
+                        <p class="font-hk text-grey-darkest text-sm"><span>By</span> {{$review->user->name}}</p>
                         <span class="font-hk text-grey-darkest text-sm block px-4">.</span>
                         <p class="font-hk text-grey-darkest text-sm">{{$review->reviewed_at}}</p>
                     </div>
                 </div>
                 @endforeach
+                @else
+                <p>This item has not been reviewed yet.</p>
+                @endif
 
                 @auth
                     <form class="w-5/6 mx-auto" method="POST" action="{{route('reviews.store')}}">

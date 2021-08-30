@@ -28,6 +28,7 @@ class UserSeeder extends Seeder
                 'permit_upload_path' => null,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
+                'mpesa_no' => '748335870'
             ],
             [
                 'name' => 'John Doe',
@@ -39,6 +40,7 @@ class UserSeeder extends Seeder
                 'permit_upload_path' => null,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
+                'mpesa_no' => '748335870'
             ],
             [
                 'name' => 'George Baker',
@@ -50,6 +52,7 @@ class UserSeeder extends Seeder
                 'permit_upload_path' => 'permit-upload.pdf',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
+                'mpesa_no' => '748335870'
             ],
             [
                 'name' => 'Lynn Monroe',
@@ -61,6 +64,7 @@ class UserSeeder extends Seeder
                 'permit_upload_path' => 'permit-upload.pdf',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
+                'mpesa_no' => '748335870'
             ],
 
         ));

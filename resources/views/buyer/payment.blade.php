@@ -74,7 +74,7 @@
             <i class="bx bx-chevron-left text-secondary group-hover:text-primary pr-2 text-2xl -mb-1 transition-colors"></i>
             Return to Cart
         </a>
-        <a href=""
+        <a href="{{route('stk',$total_price)}}"
            class="btn btn-outline bg-primary text-white hover:bg-white hover:text-primary">Pay Now</a>
     </div>
 </div>
@@ -114,7 +114,7 @@
     <h4 class="font-hkbold text-secondary pt-1 pb-2">Cart Totals</h4>
     <div class="flex justify-between py-3 border-t-2 border-indigo-500">
         <span class="font-hkbold text-secondary leading-none">Total</span>
-        <span class="font-hkbold text-secondary leading-none">$200</span>
+        <span class="font-hkbold text-secondary leading-none">{{$total_price}}</span>
     </div>
 </div>
         </div>

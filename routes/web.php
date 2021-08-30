@@ -13,6 +13,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\MpesaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,22 @@ Route::get('faq', [HomeController::class, 'faq'])->name('faq');
 Route::get('contact', [HomeController::class, 'contact'])->name('contact');
 
 Route::resource('reviews',ReviewController::class);
+Route::post('/get-token', [MpesaController::class, 'generateAccessToken']);
+Route::post('/register-urls', [MpesaController::class, 'registerURL']);
+Route::post('/simulate', [MpesaController::class, 'simulateTransaction']);
+
+Route::get('/mpesatest',function() {
+    return view('payment.mpesa');
+});
+Route::get('/stk',function() {
+    return view('payment.stkpush');
+});
+Route::get('/b2c',function() {
+    return view('payment.b2c');
+});
+Route::post('/b2ctransact', [MpesaController::class, 'b2cRequest']);
+
+
 
 Route::group(['middleware' => ['auth', 'prevent-back-history', 'verified']], function(){
     // user profile action routes
@@ -58,6 +75,7 @@ Route::group(['middleware' => ['buyer', 'auth', 'prevent-back-history', 'verifie
     Route::post('seller/upload-permit', [SellerController::class, 'upload_permit'])->name('seller.upload-permit');
     Route::resource('reviews',ReviewController::class);
     Route::resource('carts', CartController::class);
+    Route::get('/stkpush/{amount}', [MpesaController::class, 'stkPush'])->name('stk');
 
 });
 
@@ -83,5 +101,6 @@ Route::group(['middleware' => ['admin', 'auth', 'prevent-back-history', 'verifie
     Route::get('profile/activate-buyer', [SellerController::class, 'activate_buyer'])->name('seller.activate-buyer');
 
 });
+
 
 require __DIR__.'/auth.php';

@@ -32,18 +32,13 @@
                     @csrf
                     @method('PUT')
                 <div class="pt-4 md:pt-5">
-                    <div class="flex justify-between">
-                        <input type="text"
-                               value="{{$item->name}}"
-                               class="form-input mb-4 sm:mb-5 mr-2"
-                               name="user_name"
-                               id="first_name"/>
-                        <input type="text"
-                               value="{{$item->name}}"
-                               placeholder="Confirm Name"
-                               class="form-input mb-4 sm:mb-5 ml-1"
-                               id="last_name"/>
-                    </div>
+
+                    <input type="text"
+                    value="{{$item->name}}"
+                    placeholder="Name"
+                    name="user_name"
+                    class="form-input mb-4 sm:mb-5"
+                    id="username"/>
                     @error('user_name')
                     <div class=" mt-8 space-y-6 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
                         <strong>{{ $message }}</strong>

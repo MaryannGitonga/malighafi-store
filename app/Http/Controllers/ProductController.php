@@ -86,7 +86,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $reviews = DB::table('reviews')->where('product_id',$product->id)->get();
+        $reviews = $product->reviews()->get();
         return view('products.show', compact('product','reviews'));
     }
 
