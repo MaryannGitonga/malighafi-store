@@ -19,7 +19,7 @@ class ProductSeeder extends Seeder
             [
                 'name' => 'Timber',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                'price' => 10000,
+                'price' => 10,
                 'category_id' => 3,
                 'unit_id' => 2,
                 'seller_id' => 3,
@@ -29,7 +29,7 @@ class ProductSeeder extends Seeder
             [
                 'name' => 'Wooden Logs',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                'price' => 8000,
+                'price' => 40,
                 'category_id' => 3,
                 'unit_id' => 2,
                 'seller_id' => 4,
