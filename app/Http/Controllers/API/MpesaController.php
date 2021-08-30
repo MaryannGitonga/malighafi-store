@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class MpesaController extends Controller
 {
@@ -86,7 +88,7 @@ class MpesaController extends Controller
         return $response;
     }
 
-    public function stkPush($amount)
+    public function stkPush(Request $request)
     {
         //echo $amount;
         $user = User::where('id', Auth::id())->first();
@@ -99,7 +101,7 @@ class MpesaController extends Controller
             'Password' => $password,
             'Timestamp' => $timestamp,
             'TransactionType' => 'CustomerPayBillOnline',
-            'Amount' => 500,
+            'Amount' => $request->amount,
             'PartyA' => env('MPESA_TEST_PHONENUMBER'),
             'PartyB' => env('MPESA_STK_SHORTCODE'),
             'PhoneNumber' => $user_mpesa_no,
@@ -110,9 +112,19 @@ class MpesaController extends Controller
         $url = 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest';
 
         $response = $this->makeHTTP($url, $curl_post_data);
+        //return $response;
 
-       echo (json_decode($response));
+        $order = new Order;
+
+        $order->user_id = Auth::id();
+        $order->description = $request->description;
+
+        $order->save();
+
+
+       return redirect()->back()->with('success', 'Payment made successfully!');
     }
+
     /**
      * Simulate transaction
      */

@@ -75,7 +75,7 @@ Route::group(['middleware' => ['buyer', 'auth', 'prevent-back-history', 'verifie
     Route::post('seller/upload-permit', [SellerController::class, 'upload_permit'])->name('seller.upload-permit');
     Route::resource('reviews',ReviewController::class);
     Route::resource('carts', CartController::class);
-    Route::get('/stkpush/{amount}', [MpesaController::class, 'stkPush'])->name('stk');
+    Route::post('/stkpush', [MpesaController::class, 'stkPush'])->name('stk');
 
 });
 

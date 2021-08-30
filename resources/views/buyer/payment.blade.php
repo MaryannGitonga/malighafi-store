@@ -74,8 +74,6 @@
             <i class="bx bx-chevron-left text-secondary group-hover:text-primary pr-2 text-2xl -mb-1 transition-colors"></i>
             Return to Cart
         </a>
-        <a href="{{route('stk',$total_price)}}"
-           class="btn btn-outline bg-primary text-white hover:bg-white hover:text-primary">Pay Now</a>
     </div>
 </div>
 </div>
@@ -98,24 +96,31 @@
             <p class="font-hk text-secondary text-lg">{{$product['name']}}</p>
         </div>
 
+
         </div>
     </div>
     @endforeach
-    <form>
+    <h4 class="font-hkbold text-secondary pt-1 pb-2">Cart Totals</h4>
+    <div class="flex justify-between py-3 border-t-2 border-indigo-500">
+        <span class="font-hkbold text-secondary leading-none">Total</span>
+        <span class="font-hkbold text-secondary leading-none">{{$total_price}}</span>
+    </div>
+    <form method="POST" action="{{route('stk')}}">
+        @csrf
         <p class="font-hkbold text-secondary pt-1 pb-2">Cart Note</p>
         <p class="font-hk text-secondary text-sm pb-4">Special instructions for us</p>
         <label for="cart_note"
                class="block relative h-0 w-0 overflow-hidden">Cart Note</label>
         <textarea rows="5"
                   placeholder="Enter your text"
+                  name="description"
                   class="form-textarea"
                   id="cart_note"></textarea>
+        <input type="hidden" name="amount" id="amount" value="{{$total_price}}">
+        <button type="submit"
+           class="btn btn-outline bg-primary text-white hover:bg-white hover:text-primary">Pay Now</button>
     </form>
-    <h4 class="font-hkbold text-secondary pt-1 pb-2">Cart Totals</h4>
-    <div class="flex justify-between py-3 border-t-2 border-indigo-500">
-        <span class="font-hkbold text-secondary leading-none">Total</span>
-        <span class="font-hkbold text-secondary leading-none">{{$total_price}}</span>
-    </div>
+
 </div>
         </div>
     </div>
