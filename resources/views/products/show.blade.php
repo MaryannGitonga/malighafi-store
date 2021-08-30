@@ -17,7 +17,6 @@
             <div class="border-b border-grey-dark mb-8">
                 <div class="flex items-center">
                     <h2 class=" font-butler text-3xl md:text-4xl lg:text-4.5xl">{{ $product->name }}</h2>
-                    <p class="bg-primary rounded-full ml-8 px-5 py-2 leading-none font-hk font-bold text-white uppercase text-sm">20% off</p>
                 </div>
                 <div class="flex items-center pt-3">
                     <span class="font-hk text-secondary text-2xl"> Ksh {{ number_format($product->price) }}</span>
@@ -31,7 +30,7 @@
                         <i class="bx bxs-star text-primary"></i>
                         <i class="bx bxs-star text-primary"></i>
                     </div>
-                    <span class="font-hk text-sm text-secondary ml-2">(45)</span>
+                    <span class="font-hk text-sm text-secondary ml-2">({{ count($reviews) }})</span>
                 </div>
             </div>
             <div class="flex pb-5">
@@ -121,11 +120,6 @@
                   :class="{ 'active': activeTab=== 'reviews' }">
                 Reviews
             </span>
-            <span @click="activeTab = 'additional-information'"
-                  class="tab-item bg-white hover:bg-grey-light px-10 py-5 text-center sm:text-left border-t-2 border-transparent font-hk font-bold  text-secondary cursor-pointer transition-colors"
-                  :class="{ 'active': activeTab=== 'additional-information' }">
-                Additional Information
-            </span>
         </div>
         <div class="tab-content relative">
             <div :class="{ 'active': activeTab=== 'reviews' }"
@@ -151,10 +145,12 @@
                 </div>
                 @endforeach
                 @else
-                <p>This item has not been reviewed yet.</p>
+                <p class="w-5/6 mx-auto">This item has not been reviewed yet.</p>
                 @endif
 
                 @auth
+                    @if (Auth::user()->roles()->where('role_id', App\Enums\UserType::Buyer)->first() != null)
+                    @if (Auth::user()->roles()->where('role_id', App\Enums\UserType::Buyer)->first()->pivot->status == App\Enums\AccountStatus::Active)
                     <form class="w-5/6 mx-auto" method="POST" action="{{route('reviews.store')}}">
                         @csrf
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-5 pt-10">
@@ -197,6 +193,8 @@
                             class="btn btn-outline bg-primary text-white hover:bg-white hover:text-primary">Submit Review</button>
                         </div>
                     </form>
+                    @endif
+                    @endif
                 @endauth
             </div>
             <div :class="{ 'active': activeTab=== 'additional-information' }"

@@ -2,6 +2,22 @@
 
 @section('content')
 
+@if (Auth::user() != null)
+@if (Auth::user()->roles()->where('role_id', App\Enums\UserType::Administrator)->first() != null)
+@if (Auth::user()->roles()->where('role_id', App\Enums\UserType::Administrator)->first()->pivot->status == App\Enums\AccountStatus::Active)
+<script type="text/javascript">
+    window.location = "/dashboard";//here double curly bracket
+</script>
+@endif
+@elseif (Auth::user()->roles()->where('role_id', App\Enums\UserType::Seller)->first() != null)
+@if(Auth::user()->roles()->where('role_id', App\Enums\UserType::Seller)->first()->pivot->status == App\Enums\AccountStatus::Active)
+<script type="text/javascript">
+    window.location = "/dashboard";//here double curly bracket
+</script>
+@endif
+@endif
+@endif
+
 @if ($message = Session::get('success'))
     <div x-data='{ open: true }' class="fixed z-50 bottom-0 left-0 w-full p-4 md:w-1/2 md:top-0 md:bottom-auto md:right-0 md:p-8 md:left-auto xl:w-1/3 h-auto rounded">
         <div class="bg-white rounded p-4 flex items-center shadow-lg h-auto border-gray-200 border" x-show='open'>
@@ -52,8 +68,6 @@
                                 <div class="w-full h-68 bg-center bg-no-repeat bg-cover"
                                     style="background-image:url({{ $product->path }})">
                                 </div>
-                                <span
-                                    class="absolute top-0 right-0 bg-white px-5 py-1 mt-4 mr-4 rounded-full font-hk font-bold  bg-indigo-700 text-white text-sm uppercase tracking-wide">New</span>
                                 <div class="absolute opacity-0 transition-opacity group-hover:opacity-100 flex justify-center items-center py-28 inset-0 group bg-secondary bg-opacity-85">
                                     <a href=""
                                     class="bg-white hover:bg-gray-300 rounded-full px-3 py-3 flex items-center transition-all mr-3">
@@ -108,4 +122,5 @@
         </div>
     </div>
 </div>
+
 @endsection

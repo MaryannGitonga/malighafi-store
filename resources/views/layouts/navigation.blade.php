@@ -123,10 +123,6 @@
                                 <a href="{{ route('contact') }}"
                                    class="block text-lg font-hk hover:font-bold transition-all text-secondary hover:text-indigo-500 border-b-2 border-white hover:border-indigo-500 px-2">Contact</a>
                             </li>
-                            <li class="mr-10">
-                                <a href="{{ route('shop') }}"
-                                class="block text-lg font-hk hover:font-bold transition-all text-secondary hover:text-indigo-500 border-b-2 border-white hover:border-indigo-500 px-2">Shop</a>
-                            </li>
                         @endif
                     @endif
 
@@ -155,10 +151,6 @@
                             <li class="mr-10">
                                 <a href="{{ route('orders.index') }}"
                                 class="block text-lg font-hk hover:font-bold transition-all text-secondary hover:text-indigo-500 border-b-2 border-white hover:border-indigo-500 px-2">Orders</a>
-                            </li>
-                            <li class="mr-10">
-                                <a href="{{ route('shop') }}"
-                                   class="block text-lg font-hk hover:font-bold transition-all text-secondary hover:text-indigo-500 border-b-2 border-white hover:border-indigo-500 px-2">Shop</a>
                             </li>
                         @endif
                     @endif

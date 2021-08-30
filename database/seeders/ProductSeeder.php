@@ -24,7 +24,7 @@ class ProductSeeder extends Seeder
                 'unit_id' => 2,
                 'seller_id' => 3,
                 'path' => 'storage/post_uploads/raw-material.jpg',
-                'status' => ProductStatus::Pending
+                'status' => ProductStatus::Approved
             ],
             [
                 'name' => 'Wooden Logs',
@@ -34,7 +34,7 @@ class ProductSeeder extends Seeder
                 'unit_id' => 2,
                 'seller_id' => 4,
                 'path' => 'storage/post_uploads/raw-material.jpg',
-                'status' => ProductStatus::Pending
+                'status' => ProductStatus::Approved
             ],
         ]);
     }
