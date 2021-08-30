@@ -10,6 +10,7 @@
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "laracasts/utilities": "^3.2",
         "laravel-views/laravel-views": "^2.3",
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5"

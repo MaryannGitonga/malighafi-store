@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\InboxMessageStatus;
 use App\Enums\UserType;
 use App\Http\Requests\ProductRequest;
 use App\Models\Category;
+use App\Models\InboxMessage;
 use App\Models\Product;
 use App\Models\Unit;
 use App\Models\User;
@@ -15,21 +17,12 @@ use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         return view('products.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $categories = Category::all();
@@ -46,12 +39,7 @@ class ProductController extends Controller
         return view('products.create',compact('categories', 'units', 'sellers'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(ProductRequest $request)
     {
         $request->validated();
@@ -71,18 +59,25 @@ class ProductController extends Controller
             $product_model->seller_id = ($request->user()->roles()->where('role_id', UserType::Administrator)->first() != null) ? $request->seller_id : $request->user()->id;
 
             $product_model->save();
-            return redirect()->route('products.index')->with('success','Product created successfully.');
 
+            // Send message to admin for product review
+            $admins = DB::table('role_user')->where('role_id', UserType::Administrator)->get();
+
+            foreach ($admins as $admin) {
+                InboxMessage::create([
+                    'title' => "New Product Upload.",
+                    'message' => $request->user()->name . " has uploaded a new product. Please review the new product.",
+                    'user_id' => $admin->user_id,
+                    'status' => InboxMessageStatus::Unread
+                ]);
+            }
+
+            return redirect()->route('products.index')->with('success','Product created successfully.');
         }
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Product $product)
     {
         return view('products.show', compact('product'));
@@ -102,13 +97,7 @@ class ProductController extends Controller
 
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(ProductRequest $request, Product $product)
     {
         $validated = $request->validated();
@@ -136,12 +125,7 @@ class ProductController extends Controller
     }
 
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(Product $product)
     {
         $product->delete();

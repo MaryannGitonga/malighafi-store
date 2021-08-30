@@ -260,16 +260,6 @@
         <form class="sm:w-2/3 md:w-full lg:w-1/3 mx-auto lg:mx-0 mt-16 lg:mt-0">
             <div class="bg-grey-light py-8 px-8">
                 <h4 class="font-hkbold text-secondary text-2xl pb-3 text-center sm:text-left">Cart Totals</h4>
-                <div>
-                    <p class="font-hkbold text-secondary pt-1 pb-2">Cart Note</p>
-                    <p class="font-hk text-secondary text-sm pb-4">Special instructions for us</p>
-                    <label for="cart_note"
-                           class="block relative h-0 w-0 overflow-hidden">Cart Note</label>
-                    <textarea rows="5"
-                              placeholder="Enter your text"
-                              class="form-textarea"
-                              id="cart_note"></textarea>
-                </div>
                 <div class="mb-12 pt-4">
                     <p class="font-hkbold text-secondary pt-1 pb-2">Cart Total</p>
                     <div class="pt-3 flex justify-between">

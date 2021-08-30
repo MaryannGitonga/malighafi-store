@@ -23,12 +23,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class, 'welcome'])->name('home');
 Route::get('about', [HomeController::class, 'about'])->name('about');
 Route::get('shop', [HomeController::class, 'index'])->name('shop');
 Route::get('products/{product}', [ProductController::class, 'show'])->name('products.show');
 Route::get('faq', [HomeController::class, 'faq'])->name('faq');
 Route::get('contact', [HomeController::class, 'contact'])->name('contact');
+Route::post('search', [HomeController::class, 'search'])->name('search');
 
 Route::group(['middleware' => ['auth', 'prevent-back-history', 'verified']], function(){
     // user profile action routes
@@ -59,18 +59,23 @@ Route::group(['middleware' => ['admin', 'auth', 'prevent-back-history', 'verifie
     Route::resource('orders', OrderController::class);
     Route::resource('roles', RoleController::class);
     Route::get('products', [ProductController::class, 'index'])->name('products.index');
-    Route::get('products/create', [ProductController::class, 'create'])->name('products.create');
+    Route::get('new-product', [ProductController::class, 'create'])->name('products.create');
     Route::post('products', [ProductController::class, 'store'])->name('products.store');
     Route::get('products/edit/{product}', [ProductController::class, 'edit'])->name('products.edit');
     Route::put('products/{product}', [ProductController::class, 'update'])->name('products.update');
     Route::delete('products/{product}', [ProductController::class, 'delete'])->name('products.delete');
+    Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
     // Admin routes
     Route::get('admin/profile', [AdminController::class, 'profile'])->name('admin.profile');
+    Route::get('admin/inbox', [AdminController::class, 'inbox'])->name('admin.inbox');
     Route::resource('users', UserController::class);
+    Route::get('download-permit/{user}', [AdminController::class, 'download_permit'])->name('admin.download-permit');
+    Route::get('verify-seller/{user}', [AdminController::class, 'verify_seller'])->name('admin.verify-seller');
 
     // Seller routes
     Route::get('seller/profile', [SellerController::class, 'profile'])->name('seller.profile');
+    Route::get('seller/inbox', [SellerController::class, 'inbox'])->name('seller.inbox');
     Route::get('profile/activate-buyer', [SellerController::class, 'activate_buyer'])->name('seller.activate-buyer');
 
 });

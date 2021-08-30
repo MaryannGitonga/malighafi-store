@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\AccountStatus;
+use App\Enums\ProductStatus;
 use App\Enums\UserType;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -10,11 +11,6 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    public function welcome()
-    {
-        return view('welcome');
-    }
-
     public function about()
     {
         return view('about');
@@ -34,16 +30,27 @@ class HomeController extends Controller
                 }
             }
             else{
-                $products = Product::all();
+                $products = Product::where('status', ProductStatus::Approved)->get();
                 return view('product-index', compact('products'));
             }
         }
-        $products = Product::all();
+        $products = Product::where('status', ProductStatus::Approved)->get();
         return view('product-index', compact('products'));
     }
 
     public function contact()
     {
         return view('contact');
+    }
+
+    public function search(Request $request)
+    {
+        $request->validate([
+            'search_name' => ''
+        ]);
+        $products = Product::where('status', ProductStatus::Approved)
+                            ->where('name', $request->search_name)
+                            ->get();
+        return view('search', compact('products'));
     }
 }

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Enums\AccountStatus;
+use App\Enums\InboxMessageStatus;
 use App\Enums\UserType;
+use App\Events\PermitUploaded;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -27,7 +29,12 @@ class SellerController extends Controller
         // user to populate the profile form
         $user = $request->user();
 
-        return view('seller.profile', compact('user'));
+        $messages = DB::table('inbox_messages')
+        ->where('status', InboxMessageStatus::Unread)
+        ->where('user_id', $request->user()->id)
+        ->get();
+
+        return view('seller.profile', compact('user', 'messages'));
     }
 
     public function check_permit(Request $request)
@@ -57,7 +64,9 @@ class SellerController extends Controller
                 $request->user()->save();
             }
 
-            return redirect()->route('buyer.activate-seller');
+            PermitUploaded::dispatch($request->user());
+
+            return redirect()->route('buyer.activate-seller')->with('permit-uploaded', 'Your credentials has been successfully uploaded. Please wait a little as we verify your account.');
         }
     }
 
@@ -95,5 +104,21 @@ class SellerController extends Controller
         ]);
 
         return redirect()->route('buyer.profile');
+    }
+
+    public function inbox(Request $request)
+    {
+        DB::table('inbox_messages')
+        ->where('user_id', $request->user()->id)
+        ->where('status', InboxMessageStatus::Unread)
+        ->update([
+            'status' => InboxMessageStatus::Read
+        ]);
+
+        $messages = DB::table('inbox_messages')
+        ->where('user_id', $request->user()->id)
+        ->get();
+
+        return view('seller.inbox', compact('messages'));
     }
 }

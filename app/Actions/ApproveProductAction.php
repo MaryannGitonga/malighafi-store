@@ -2,7 +2,11 @@
 
 namespace App\Actions;
 
+use App\Enums\InboxMessageStatus;
 use App\Enums\ProductStatus;
+use App\Mail\ProductApproved;
+use App\Models\InboxMessage;
+use Illuminate\Support\Facades\Mail;
 use LaravelViews\Actions\Action;
 use LaravelViews\Views\View;
 
@@ -30,6 +34,16 @@ class ApproveProductAction extends Action
     {
         $model->status = ProductStatus::Approved;
         $model->save();
+
+        InboxMessage::create([
+            'title' => "New Seller Credentials Submitted.",
+            'message' => "Your product, ". $model->name." has been approved. It is now visible to the market.",
+            'user_id' => $model->seller->id,
+            'status' => InboxMessageStatus::Unread
+        ]);
+
+        Mail::to($model->seller->email)->send(new ProductApproved($model->seller, $model));
+
         $this->success('Product approved successfully.');
     }
 }

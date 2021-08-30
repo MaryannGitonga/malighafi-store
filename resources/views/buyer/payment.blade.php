@@ -80,7 +80,7 @@
         <div class="sm:w-2/3 md:w-1/2 lg:w-1/3 bg-grey-light mt-16 lg:mt-0">
             <div class="p-8">
     <h3 class="font-hkbold text-secondary text-2xl pb-3 text-center sm:text-left">Your Order</h3>
-    <p class="font-hkbold text-secondary uppercase text-center sm:text-left">PRODUCTS</p>
+    <p class="font-hkbold text-secondary uppercase text-center sm:text-left">Products</p>
     <div class="mt-5 mb-8">
         <div class="flex items-center mb-5">
             <div class="w-20 relative mr-3 sm:pr-0">
@@ -119,6 +119,16 @@
             <p class="font-hk text-secondary text-lg">Product 3</p>
         </div>
     </div>
+    <form>
+        <p class="font-hkbold text-secondary pt-1 pb-2">Cart Note</p>
+        <p class="font-hk text-secondary text-sm pb-4">Special instructions for us</p>
+        <label for="cart_note"
+               class="block relative h-0 w-0 overflow-hidden">Cart Note</label>
+        <textarea rows="5"
+                  placeholder="Enter your text"
+                  class="form-textarea"
+                  id="cart_note"></textarea>
+    </form>
     <h4 class="font-hkbold text-secondary pt-1 pb-2">Cart Totals</h4>
     <div class="flex justify-between py-3 border-t-2 border-indigo-500">
         <span class="font-hkbold text-secondary leading-none">Total</span>

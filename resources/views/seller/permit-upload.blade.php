@@ -13,8 +13,9 @@
         <div>
             <img class="mx-auto h-12 w-auto" src="{{ asset('images/logo.png') }}" alt="Malighafi Store Logo">
             <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Vendor Credentials
+            Seller Credentials
             </h2>
+            <p class="text-gray-700 text-sm text-center pt-2">Please fill in the following credentials to be able to upload your products on the store.</p>
         </div>
         <form method="POST" action="{{ route('seller.upload-permit') }}" enctype="multipart/form-data">
             @csrf

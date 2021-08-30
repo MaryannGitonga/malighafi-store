@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class InboxMessage extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'title',
+        'message',
+        'user_id',
+        'status',
+    ];
 }

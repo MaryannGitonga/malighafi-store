@@ -4,6 +4,8 @@ namespace App\Http\Livewire;
 
 use App\Actions\DisableUserAction;
 use App\Actions\RestoreUserAction;
+use App\Enums\AccountStatus;
+use App\Enums\UserType;
 use App\Filters\UserTypeFilter;
 use LaravelViews\Views\TableView;
 use App\Models\User;
@@ -43,6 +45,7 @@ class UsersTableView extends TableView
             'Image',
             'Name',
             'Email',
+            'Active Role',
             'Created',
             'Disabled'
         ];
@@ -60,6 +63,7 @@ class UsersTableView extends TableView
             ($model->profile_photo_path == null) ? UI::avatar(asset('assets/img/icons/icon-user.svg')): UI::avatar(asset($model->profile_photo_path)),
             $model->name,
             $model->email,
+            ($model->roles()->where('role_id', UserType::Administrator)->where('status', AccountStatus::Active)->exists()) ? "Administrator" : (($model->roles()->where('role_id', UserType::Seller)->where('status', AccountStatus::Active)->exists()) ? "Seller" : "Buyer"),
             $model->created_at->diffforHumans(),
             ($model->deleted_at != null) ? UI::icon('check'): ""
         ];
@@ -73,13 +77,5 @@ class UsersTableView extends TableView
             new RedirectAction('users.edit', 'View user', 'eye'),
         ];
     }
-
-    protected function filters()
-    {
-        return [
-            new UserTypeFilter
-        ];
-    }
-
 
 }

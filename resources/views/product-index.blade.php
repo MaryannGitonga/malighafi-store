@@ -35,13 +35,14 @@
         <div class="bg-grey-light lg:w-full mt-12 lg:mt-0">
             <div class="py-8 px-5 md:px-8">
                 <div class="py-10 flex flex-col sm:flex-row justify-between">
-                    <div class="flex items-center justify-start sm:justify-end mt-6 sm:mt-0 w-80">
-                        <span class="font-hk text-secondary md:text-lg mr-2 -mt-2 inline-block">Sort by:</span>
-                        <select class="w-2/3 form-select">
-                            <option value="0">Best Match</option>
-                            <option value="1">Price: Low - High</option>
-                            <option value="2">Price: High - Low</option>
-                        </select>
+                    <div class="flex items-center justify-start sm:justify-end mt-6 sm:mt-0">
+                        <form action="{{ route('search')}}" method="POST" class="px-4 py-3 rounded-md flex items-center w-80">
+                            @csrf
+                            <input type="text" name="search_name" class="font-hk font-medium text-secondary outline-none border-grey-dark w-full placeholder-grey-darkest focus:ring focus:ring-primary focus:outline-none focus:border-primary focus:border-2" placeholder="Search for a product">
+                            <button type="submit" class="flex items-center focus:outline-none focus:border-transparent">
+                                <i class="bx bx-search text-primary text-xl ml-4"></i>
+                            </button>
+                        </form>
                     </div>
                 </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">

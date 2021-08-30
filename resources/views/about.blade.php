@@ -42,7 +42,7 @@
                 </ul>
             </div>
             <div class="text-center py-16 lg:py-0">
-                <a href="{{ route('home') }}"
+                <a href="{{ route('shop') }}"
                 style="font-family: 'Source Sans Pro', sans-serif; color: #5a67da;" class="lg:text-5xl md:text-4xl sm:text-2xl">Malighafi Store</a>
                 <div class="flex items-center justify-center pt-5">
                     <a href="https://www.google.com/"

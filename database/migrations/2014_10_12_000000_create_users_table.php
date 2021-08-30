@@ -28,6 +28,7 @@ class CreateUsersTable extends Migration
             $table->string('kra_pin')->unique()->nullable();
             $table->string('permit_no')->unique()->nullable();
             $table->string('permit_upload_path')->nullable();
+            $table->boolean('permit_approved')->default(false);
             $table->string('mpesa_no')->nullable();
             $table->rememberToken();
             $table->softDeletes();

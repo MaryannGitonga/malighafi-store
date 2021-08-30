@@ -18,14 +18,24 @@
         <link rel="stylesheet" href="{{ asset('npm/boxicons_2.0.5/css/boxicons.min.css') }}"/>
         <link rel="stylesheet" href="{{ asset('assets/styles/fonts.css') }}" media="screen"/>
         <link rel="stylesheet" href="{{ asset('assets/styles/main.min.css') }}" media="screen"/>
-
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600&display=swap');
         </style>
+        @yield('chart-styles')
 
         <!-- Scripts -->
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
         <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="{{ asset('assets/js/init-alpine.js') }}" defer></script>
+
+        {{-- Chart scripts --}}
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/series-label.js"></script>
+        <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        <script src="https://code.highcharts.com/modules/export-data.js"></script>
+        <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+        @yield('chart-pie')
 
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">

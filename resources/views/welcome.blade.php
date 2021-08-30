@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends(Auth::user() == null ? 'layouts.guest': 'layouts.app')
 
 @section('content')
 

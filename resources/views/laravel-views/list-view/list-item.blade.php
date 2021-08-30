@@ -7,7 +7,7 @@
         {{ $title }}
       </div>
       <div class="text-base font-normal">
-        {{ $subtitle }}
+        {!! $subtitle !!}
       </div>
     </div>
     <x-lv-actions :actions="$actions" :model="$model" />

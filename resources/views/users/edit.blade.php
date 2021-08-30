@@ -1,18 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="max-w-7xl mx-auto py-2 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-start mr-8">
-        <a href="{{ route('users.index') }}" class="relative w-50 flex justify-center mt-8 py-2 px-4 border border-transparent text-sm font-small rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-            ← Back
-        </a>
-    </div>
+<div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
     <div class="px-4 py-6 sm:px-0">
-    <h4
-        class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300"
-            >
+            <h4
+                class="flex items-center justify-start mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300 inline-block"
+                    >
               User - Edit
             </h4>
+            @if ($user->roles()->where('id', App\Enums\UserType::Seller)->exists())
+                <div class="flex items-center justify-end mr-8 inline-block">
+                    <a href="{{ route('admin.download-permit', $user->id) }}" class="relative w-50 flex justify-center mt-8 py-2 px-4 border border-transparent text-md font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        View Permit
+                    </a>
+                    <a href="{{ route('admin.verify-seller', $user->id) }}" class="ml-4 relative w-50 flex justify-center mt-8 py-2 px-4 border border-transparent text-md font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        Verify Seller Account
+                    </a>
+                </div>
+            @endif
             <form action="{{ route('users.update', $user->id) }}" method="POST" enctype="multipart/form-data"
               class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800"
             >
