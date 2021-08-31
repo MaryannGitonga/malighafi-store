@@ -47,6 +47,46 @@ class RoleUserSeeder extends Seeder
                 'role_id' => UserType::Seller,
                 'status' => AccountStatus::Active
             ],
+            [
+                'user_id' => 5,
+                'role_id' => UserType::Buyer,
+                'status' => AccountStatus::Active
+            ],
+            [
+                'user_id' => 5,
+                'role_id' => UserType::Seller,
+                'status' => AccountStatus::Disabled
+            ],
+            [
+                'user_id' => 6,
+                'role_id' => UserType::Buyer,
+                'status' => AccountStatus::Active
+            ],
+            [
+                'user_id' => 6,
+                'role_id' => UserType::Seller,
+                'status' => AccountStatus::Disabled
+            ],
+            [
+                'user_id' => 7,
+                'role_id' => UserType::Buyer,
+                'status' => AccountStatus::Active
+            ],
+            [
+                'user_id' => 7,
+                'role_id' => UserType::Seller,
+                'status' => AccountStatus::Disabled
+            ],
+            [
+                'user_id' => 8,
+                'role_id' => UserType::Buyer,
+                'status' => AccountStatus::Disabled
+            ],
+            [
+                'user_id' => 8,
+                'role_id' => UserType::Seller,
+                'status' => AccountStatus::Active
+            ],
         ));
     }
 }

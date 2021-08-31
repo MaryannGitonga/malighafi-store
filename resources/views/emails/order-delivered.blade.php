@@ -8,6 +8,6 @@
 </head>
 <body>
     <p>Hello {{ $buyerName}},</p>
-    <p>Your order No. {{ $orderNo }} is in transit. Tell us what you think of the goods and the service by submitting a review.</p>
+    <p>Your order No. {{ $orderNo }} has been delivered. Tell us what you think of the goods and the service by submitting a review.</p>
 </body>
 </html>

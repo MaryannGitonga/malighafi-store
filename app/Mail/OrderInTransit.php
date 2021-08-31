@@ -35,7 +35,7 @@ class OrderInTransit extends Mailable
                     ->subject($subject)
                     ->with([
                         'orderNo' => $this->order->id,
-                        'buyerName' => $this->order->user()->name,
+                        'buyerName' => $this->order->user->name,
                     ]);
     }
 }

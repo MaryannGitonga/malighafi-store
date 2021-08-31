@@ -32,15 +32,15 @@ class MarkOrderDelivered extends Action
      */
     public function handle($model, View $view)
     {
-        $model->products()->first()->pivot->status = OrderStatus::delivered;
+        $model->products()->first()->pivot->status = "Delivered";
         $model->save();
 
-        Mail::to($model->user()->email)->send(new OrderDelivered($model));
+        Mail::to($model->user->email)->send(new OrderDelivered($model));
 
         InboxMessage::create([
             'title' => "Your Order has been Delivered.",
             'message' => "Your order has been delivered. Tell us what you think of the goods and the service by submitting a review.",
-            'user_id' => $model->user()->id,
+            'user_id' => $model->user->id,
             'status' => InboxMessageStatus::Unread
         ]);
 

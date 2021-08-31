@@ -36,6 +36,26 @@ class ProductSeeder extends Seeder
                 'path' => 'storage/post_uploads/raw-material.jpg',
                 'status' => ProductStatus::Approved
             ],
+            [
+                'name' => 'Natural Rubber',
+                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                'price' => 30,
+                'category_id' => 2,
+                'unit_id' => 2,
+                'seller_id' => 4,
+                'path' => 'storage/post_uploads/natural-rubber.jpg',
+                'status' => ProductStatus::Approved
+            ],
+            [
+                'name' => 'Barley',
+                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                'price' => 50,
+                'category_id' => 1,
+                'unit_id' => 2,
+                'seller_id' => 4,
+                'path' => 'storage/post_uploads/barley.jpg',
+                'status' => ProductStatus::Approved
+            ],
         ]);
     }
 }

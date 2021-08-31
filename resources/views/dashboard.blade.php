@@ -174,7 +174,7 @@
           class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800"
         >
           <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
-            Sales
+            Registered Users Trend
           </h4>
           <div id="bar"></div>
         </div>
@@ -234,40 +234,62 @@
     });
 
     Highcharts.chart('bar', {
-        chart: {
-            type: 'column'
-        },
+
+    title: {
+        text: ''
+    },
+
+    subtitle: {
+        text: 'Registered Users Over Time'
+    },
+
+    yAxis: {
         title: {
-            text: ''
-        },
-        xAxis: {
-            categories: Highcharts.getOptions().lang.shortMonths
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: 'Total products sold'
+            text: 'Number of Users'
+        }
+    },
+
+    xAxis: {
+        accessibility: {
+            rangeDescription: 'Range: 2017 to 2021'
+        }
+    },
+
+    legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'middle'
+    },
+
+    plotOptions: {
+        series: {
+            label: {
+                connectorAllowed: false
+            },
+            pointStart: 2017
+        }
+    },
+
+    series: [{
+        name: '',
+        data: [0, 0, 2, 3, 3]
+    }],
+
+    responsive: {
+        rules: [{
+            condition: {
+                maxWidth: 500
+            },
+            chartOptions: {
+                legend: {
+                    layout: 'horizontal',
+                    align: 'center',
+                    verticalAlign: 'bottom'
+                }
             }
-        },
-        tooltip: {
-            pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
-            shared: true
-        },
-        plotOptions: {
-            column: {
-                stacking: 'percent'
-            }
-        },
-        series: [{
-            name: 'Product 1',
-            data: [5, 3, 4, 7, 2, 5, 3, 4]
-        }, {
-            name: 'Product 2',
-            data: [2, 2, 3, 2, 1, 2, 2, 3]
-        }, {
-            name: 'Product 3',
-            data: [3, 4, 4, 2, 5, 3, 4, 4]
         }]
+    }
+
     });
 </script>
 @endif
