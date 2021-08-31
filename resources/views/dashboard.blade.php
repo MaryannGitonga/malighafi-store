@@ -235,52 +235,39 @@
 
     Highcharts.chart('bar', {
         chart: {
-            type: 'column',
-            options3d: {
-                enabled: true,
-                alpha: 10,
-                beta: 25,
-                depth: 70
-            }
+            type: 'column'
         },
         title: {
             text: ''
         },
-        subtitle: {
-            text: 'Overall sales across the year'
+        xAxis: {
+            categories: Highcharts.getOptions().lang.shortMonths
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Total products sold'
+            }
+        },
+        tooltip: {
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+            shared: true
         },
         plotOptions: {
             column: {
-                depth: 25
-            }
-        },
-        xAxis: {
-            categories: Highcharts.getOptions().lang.shortMonths,
-            labels: {
-                skew3d: true,
-                style: {
-                    fontSize: '16px'
-                }
-            }
-        },
-        yAxis: {
-            title: {
-                text: null
+                stacking: 'percent'
             }
         },
         series: [{
             name: 'Product 1',
-            data: [2, 3, null, 4, 0, 5, 1, 4, 6, 3]
-        },
-        {
+            data: [5, 3, 4, 7, 2, 5, 3, 4]
+        }, {
             name: 'Product 2',
-            data: [2, 3, null, 4, 0, 5, 1, 4, 6, 3]
-        },
-        {
+            data: [2, 2, 3, 2, 1, 2, 2, 3]
+        }, {
             name: 'Product 3',
-            data: [2, 3, null, 4, 0, 5, 1, 4, 6, 3]
-        },
-        ]
+            data: [3, 4, 4, 2, 5, 3, 4, 4]
+        }]
     });
 </script>
 @endif
@@ -394,52 +381,39 @@
 <script defer>
     Highcharts.chart('bar', {
         chart: {
-            type: 'column',
-            options3d: {
-                enabled: true,
-                alpha: 10,
-                beta: 25,
-                depth: 70
-            }
+            type: 'column'
         },
         title: {
             text: ''
         },
-        subtitle: {
-            text: 'Overall sales across the year'
+        xAxis: {
+            categories: Highcharts.getOptions().lang.shortMonths
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Total products sold'
+            }
+        },
+        tooltip: {
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+            shared: true
         },
         plotOptions: {
             column: {
-                depth: 25
-            }
-        },
-        xAxis: {
-            categories: Highcharts.getOptions().lang.shortMonths,
-            labels: {
-                skew3d: true,
-                style: {
-                    fontSize: '16px'
-                }
-            }
-        },
-        yAxis: {
-            title: {
-                text: null
+                stacking: 'percent'
             }
         },
         series: [{
             name: 'Product 1',
-            data: [2, 3, null, 4, 0, 5, 1, 4, 6, 3]
-        },
-        {
+            data: [5, 3, 4, 7, 2, 5, 3, 4]
+        }, {
             name: 'Product 2',
-            data: [2, 3, null, 4, 0, 5, 1, 4, 6, 3]
-        },
-        {
+            data: [2, 2, 3, 2, 1, 2, 2, 3]
+        }, {
             name: 'Product 3',
-            data: [2, 3, null, 4, 0, 5, 1, 4, 6, 3]
-        },
-        ]
+            data: [3, 4, 4, 2, 5, 3, 4, 4]
+        }]
     });
 </script>
 @endif
