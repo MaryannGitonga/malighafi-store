@@ -32,8 +32,10 @@ class MarkOrderInTransit extends Action
      */
     public function handle($model, View $view)
     {
-        $model->products()->first()->pivot->status = "In transit";
-        $model->save();
+        $product = $model->products()->first();
+        $model->products()->updateExistingPivot($product->id, [
+            'status' => OrderStatus::in_transit,
+        ]);
 
         Mail::to($model->user->email)->send(new OrderInTransit($model));
 

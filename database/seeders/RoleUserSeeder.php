@@ -60,12 +60,12 @@ class RoleUserSeeder extends Seeder
             [
                 'user_id' => 6,
                 'role_id' => UserType::Buyer,
-                'status' => AccountStatus::Active
+                'status' => AccountStatus::Disabled
             ],
             [
                 'user_id' => 6,
                 'role_id' => UserType::Seller,
-                'status' => AccountStatus::Disabled
+                'status' => AccountStatus::Active
             ],
             [
                 'user_id' => 7,

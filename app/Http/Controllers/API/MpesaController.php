@@ -141,11 +141,11 @@ class MpesaController extends Controller
                 'status' => InboxMessageStatus::Unread
             ]);
 
-            Mail::to($product->seller->id)->send(new NewOrder($product->seller->id, $product));
+            Mail::to($product->seller->email)->send(new NewOrder($product->seller, $product));
         }
         DB::table('carts')->where('user_id', Auth::id())->delete();
 
-        Mail::to(Auth::user()->id)->send(new PaymentSuccessful(Auth::user(), $order));
+        Mail::to(Auth::user()->email)->send(new PaymentSuccessful(Auth::user(), $order));
 
 
        return redirect()->route('shop')->with('success', 'Payment made successfully!');

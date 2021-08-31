@@ -96,7 +96,9 @@ class ProductController extends Controller
         foreach ($reviews as $review) {
             $stars += $review->rating;
         }
-        $stars /= count($reviews);
+        if ($stars != 0) {
+            $stars /= count($reviews);
+        }
         $review_stars = ceil($stars);
 
         return view('products.show', compact('product','reviews', 'exists', 'review_stars'));

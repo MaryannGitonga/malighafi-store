@@ -22,7 +22,7 @@ class ProductSeeder extends Seeder
                 'price' => 10,
                 'category_id' => 3,
                 'unit_id' => 2,
-                'seller_id' => 3,
+                'seller_id' => 6,
                 'path' => 'storage/post_uploads/raw-material.jpg',
                 'status' => ProductStatus::Approved
             ],
@@ -32,7 +32,7 @@ class ProductSeeder extends Seeder
                 'price' => 40,
                 'category_id' => 3,
                 'unit_id' => 2,
-                'seller_id' => 4,
+                'seller_id' => 6,
                 'path' => 'storage/post_uploads/raw-material.jpg',
                 'status' => ProductStatus::Approved
             ],
@@ -42,7 +42,7 @@ class ProductSeeder extends Seeder
                 'price' => 30,
                 'category_id' => 2,
                 'unit_id' => 2,
-                'seller_id' => 4,
+                'seller_id' => 6,
                 'path' => 'storage/post_uploads/natural-rubber.jpg',
                 'status' => ProductStatus::Approved
             ],
@@ -52,7 +52,7 @@ class ProductSeeder extends Seeder
                 'price' => 50,
                 'category_id' => 1,
                 'unit_id' => 2,
-                'seller_id' => 4,
+                'seller_id' => 6,
                 'path' => 'storage/post_uploads/barley.jpg',
                 'status' => ProductStatus::Approved
             ],

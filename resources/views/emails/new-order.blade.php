@@ -9,7 +9,7 @@
 <body>
     <p>Hello {{ $sellerName}},</p>
     <p>You have a new order.</p>
-    <table>
+    {{-- <table>
         <tr>
             <th>Product</th>
             <th>Quantity</th>
@@ -22,6 +22,6 @@
             <td>{{ number_format($product->price * $product->quantity) }}</td>
             <td>{{ $product->status }}</td>
         </tr>
-    </table>
+    </table> --}}
 </body>
 </html>

@@ -52,7 +52,7 @@
                                id="email_address"/>
 
                         <input type="text"
-                               value="{{$item->phone}}"
+                               value="{{$item->mpesa_no}}"
                                placeholder="Phone number"
                                name="phone"
                                class="form-input mb-4 sm:mb-5 ml-1"

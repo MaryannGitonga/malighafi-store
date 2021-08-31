@@ -49,8 +49,6 @@
                                 <div class="w-full h-68 bg-center bg-no-repeat bg-cover"
                                     style="background-image:url({{ $product->path }})">
                                 </div>
-                                <span
-                                    class="absolute top-0 right-0 bg-white px-5 py-1 mt-4 mr-4 rounded-full font-hk font-bold  bg-indigo-700 text-white text-sm uppercase tracking-wide">New</span>
                                 <div class="absolute opacity-0 transition-opacity group-hover:opacity-100 flex justify-center items-center py-28 inset-0 group bg-secondary bg-opacity-85">
                                     <a href=""
                                     class="bg-white hover:bg-gray-300 rounded-full px-3 py-3 flex items-center transition-all mr-3">
@@ -64,25 +62,12 @@
                                             class="h-6 w-6"
                                             alt="icon search"/>
                                     </a>
-                                    <a href=""
-                                    class="bg-white hover:bg-gray-300  rounded-full px-3 py-3 flex items-center transition-all ">
-                                        <img src="assets/img/icons/icon-heart.svg"
-                                            class="h-6 w-6"
-                                            alt="icon heart"/>
-                                    </a>
                                 </div>
                             </div>
                             <div class="flex justify-between items-center pt-6">
                                 <div>
                                     <h3 class="font-hk text-base text-secondary">{{ $product->name }}</h3>
                                     <div class="flex items-center">
-                                        <div class="flex items-center">
-                                            <i class="bx bxs-star text-primary"></i>
-                                            <i class="bx bxs-star text-primary"></i>
-                                            <i class="bx bxs-star text-primary"></i>
-                                            <i class="bx bxs-star text-primary"></i>
-                                            <i class="bx bxs-star text-gray-400"></i>
-                                        </div>
                                         <p class="font-hk text-sm text-indigo-700 ml-2">In Stock</p>
                                     </div>
                                 </div>
