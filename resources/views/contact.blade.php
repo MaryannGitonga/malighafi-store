@@ -139,7 +139,7 @@
                              :class="faqIndex === 2 ? 'max-h-infinite' : 'max-h-0 overflow-hidden'">
                             <div class="px-5 md:px-8 py-5">
                                 <p class="font-hk text-secondary text-sm leading-loose text-left">
-                                    It depends on a lot of factors like where you're located and how many things you buy. We do have a free shipping special if you buy more than $50.</p>
+                                    It depends on a lot of factors like where you're located and how many things you buy. We do have a free shipping special if you buy more than Ksh 10,000.</p>
                             </div>
                         </div>
                     </div>
