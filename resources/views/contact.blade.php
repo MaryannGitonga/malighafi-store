@@ -49,7 +49,7 @@
     </div>
         <div class="pb-16 md:pb-20 lg:pb-24 flex flex-col lg:flex-row justify-between">
             <div class="w-full lg:w-3/8 xl:w-1/3 mx-auto lg:mx-0 border border-grey-darker shadow px-6 xl:px-8 py-10 lg:py-8 text-center lg:text-left">
-                <h2 class="border-b border-grey-dark pb-6 text-secondary text-2xl sm:text-3xl md:text-4xl">Quick contact</h2>
+                <h2 class="border-b border-grey-dark pb-6 text-secondary text-2xl sm:text-3xl md:text-4xl">Contact us</h2>
                 <h4 class="font-hk font-bold text-secondary text-lg sm:text-xl pt-8">Email</h4>
                 <p class="font-hk text-secondary">info@malighafistore.com</p>
                 <h4 class="font-hk font-bold text-secondary text-lg sm:text-xl pt-8">Phone</h4>
@@ -72,7 +72,7 @@
             </div>
             <div class="lg:w-3/5 border border-grey-darker shadow px-8 py-10 lg:py-8 mt-10 md:mt-12 lg:mt-0">
                 <form>
-                    <p class="font-hk text-secondary text-lg pb-8">Any questions? Contact us through Whatsapp or on our contact from below.</p>
+                    <p class="font-hk text-secondary text-lg pb-8">Any questions? Fill in this form and we'll get back to you as soon as possible</p>
                     <div class="grid grid-cols-1 md:grid-cols-2 md:gap-10 justify-between mb-5">
                         <div class="mb-5 sm:mb-0">
                             <label for="name"
