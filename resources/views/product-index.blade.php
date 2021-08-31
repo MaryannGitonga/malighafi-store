@@ -69,7 +69,7 @@
                                     style="background-image:url({{ $product->path }})">
                                 </div>
                                 <div class="absolute opacity-0 transition-opacity group-hover:opacity-100 flex justify-center items-center py-28 inset-0 group bg-secondary bg-opacity-85">
-                                    <a href=""
+                                    <a href="{{ route('buyer.cart') }}"
                                     class="bg-white hover:bg-gray-300 rounded-full px-3 py-3 flex items-center transition-all mr-3">
                                         <img src="assets/img/icons/icon-cart.svg "
                                             class="h-6 w-6"
@@ -81,25 +81,12 @@
                                             class="h-6 w-6"
                                             alt="icon search"/>
                                     </a>
-                                    <a href=""
-                                    class="bg-white hover:bg-gray-300  rounded-full px-3 py-3 flex items-center transition-all ">
-                                        <img src="assets/img/icons/icon-heart.svg"
-                                            class="h-6 w-6"
-                                            alt="icon heart"/>
-                                    </a>
                                 </div>
                             </div>
                             <div class="flex justify-between items-center pt-6">
                                 <div>
                                     <h3 class="font-hk text-base text-secondary">{{ $product->name }}</h3>
                                     <div class="flex items-center">
-                                        <div class="flex items-center">
-                                            <i class="bx bxs-star text-primary"></i>
-                                            <i class="bx bxs-star text-primary"></i>
-                                            <i class="bx bxs-star text-primary"></i>
-                                            <i class="bx bxs-star text-primary"></i>
-                                            <i class="bx bxs-star text-gray-400"></i>
-                                        </div>
                                         <p class="font-hk text-sm text-indigo-700 ml-2">In Stock</p>
                                     </div>
                                 </div>

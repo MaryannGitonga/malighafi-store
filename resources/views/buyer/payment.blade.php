@@ -3,6 +3,33 @@
 @section('content')
 
 <div class="container border-t border-grey-dark">
+    @if ($message = Session::get('success'))
+            <div x-data='{ open: true }' class="fixed z-50 bottom-0 left-0 w-full p-4 md:w-1/2 md:top-0 md:bottom-auto md:right-0 md:p-8 md:left-auto xl:w-1/3 h-auto rounded">
+                <div class="bg-white rounded p-4 flex items-center shadow-lg h-auto border-gray-200 border" x-show='open'>
+                <div class=" mr-4 rounded-full p-2">
+                    <div class=" rounded-full p-1 border-2">
+                    <i data-feather="check-circle" class="text-sm w-4 h-4 font-semibold"></i>
+                    </div>
+                </div>
+
+                <div class="flex-1">
+                    <b class="text-gray-900 font-semibold">
+                        Successful!
+                    </b>
+                    <div class="text-sm" >
+                        <x-lv-alert onClose='open = false'>
+                            <div>{{ $message }}</div>
+                        </x-lv-alert>
+                    </div>
+                </div>
+
+                {{-- Flush this message from the session --}}
+                <button @click.prevent="{{ $onClose ?? ''}}" class="text-gray-400 hover:text-gray-900 transition duration-300 ease-in-out cursor-pointer">
+                    <i data-feather="x-circle"></i>
+                </button>
+                </div>
+            </div>
+        @endif
     <div class="flex flex-col lg:flex-row justify-between items-center pt-10 sm:pt-12 pb-16 sm:pb-20 lg:pb-24">
         <div class="lg:w-2/3 lg:pr-16 xl:pr-20">
             <div class="flex flex-wrap items-center">
@@ -90,7 +117,7 @@
                          alt="Beautiful Brown image"
                          class="w-12 h-16 object-cover object-center"/>
                     <span
-                          class="font-hk text-white text-xs px-2 leading-none absolute top-0 right-0 bg-primary flex items-center justify-center rounded-full -mt-2 -mr-2 h-6 w-6">2</span>
+                          class="font-hk text-white text-xs px-2 leading-none absolute top-0 right-0 bg-primary flex items-center justify-center rounded-full -mt-2 -mr-2 h-6 w-6">{{ $product['quantity'] }}</span>
                 </div>
             </div>
             <p class="font-hk text-secondary text-lg">{{$product['name']}}</p>

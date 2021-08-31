@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Enums\InboxMessageStatus;
 use App\Http\Controllers\Controller;
+use App\Mail\NewOrder;
+use App\Mail\PaymentSuccessful;
+use App\Models\InboxMessage;
 use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class MpesaController extends Controller
 {
@@ -114,15 +120,35 @@ class MpesaController extends Controller
         $response = $this->makeHTTP($url, $curl_post_data);
         //return $response;
 
+        $request->validate([
+            "description" => ''
+        ]);
         $order = new Order;
-
         $order->user_id = Auth::id();
         $order->description = $request->description;
-
         $order->save();
 
+        $cart_items = DB::table('carts')->where('user_id', Auth::id())->get();
 
-       return redirect()->back()->with('success', 'Payment made successfully!');
+        foreach ($cart_items as $item) {
+            $product = Product::find($item->product_id);
+            $order->products()->attach($product->id, ['price' => $product->price, 'quantity' => $item->quantity]);
+
+            InboxMessage::create([
+                'title' => "You have a New Order",
+                'message' => "You have a new order awaiting to be processed.",
+                'user_id' => $product->seller->id,
+                'status' => InboxMessageStatus::Unread
+            ]);
+
+            Mail::to($product->seller->id)->send(new NewOrder($product->seller->id, $product));
+        }
+        DB::table('carts')->where('user_id', Auth::id())->delete();
+
+        Mail::to(Auth::user()->id)->send(new PaymentSuccessful(Auth::user(), $order));
+
+
+       return redirect()->route('shop')->with('success', 'Payment made successfully!');
     }
 
     /**

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Cart;
+use App\Models\Order;
 use App\Models\Product;
 
 class BuyerController extends Controller
@@ -81,7 +82,22 @@ class BuyerController extends Controller
             ->where('user_id', $request->user()->id)
             ->get();
 
-        return view('buyer.orders', compact('messages'));
+        $orders = Order::where('user_id', Auth::user()->id)->get();
+
+        $order_items = DB::table('order_product')->get();
+
+        $buyer_orders = array();
+
+        foreach ($orders as $order) {
+            foreach ($order_items as $item) {
+                if ($order->id == $item->order_id) {
+                    array_push($buyer_orders, $item);
+                }
+            }
+
+        }
+
+        return view('buyer.orders', compact('buyer_orders', 'messages'));
     }
 
     public function inbox(Request $request)

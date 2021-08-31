@@ -2,7 +2,13 @@
 
 namespace App\Http\Livewire;
 
+use App\Actions\MarkOrderDelivered;
+use App\Actions\MarkOrderInTransit;
+use App\Enums\OrderStatus;
 use App\Models\Order;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
+use LaravelViews\Facades\UI;
 use LaravelViews\Views\TableView;
 
 class SellerOrdersTableView extends TableView
@@ -10,9 +16,12 @@ class SellerOrdersTableView extends TableView
     /**
      * Sets a model class to get the initial data
      */
-    protected $model = Order::class;
+    public function repository(): Builder
+    {
+        return Order::query();
+    }
 
-    public $searchBy = ['ID', 'status'];
+    public $searchBy = ['id'];
 
     protected $paginate = 10;
 
@@ -26,10 +35,11 @@ class SellerOrdersTableView extends TableView
     public function headers(): array
     {
         return [
-            'ID',
-            'Items',
+            'Order ID',
             'Customer',
-            'Total Amount',
+            'Seller',
+            'Additional Info',
+            'Amount',
             'Status'
         ];
     }
@@ -42,7 +52,21 @@ class SellerOrdersTableView extends TableView
     public function row($model): array
     {
         return [
-            $model->id
+            $model->id,
+            $model->user->name,
+            $model->products()->first()->seller->name,
+            ($model->description == null) ? "None": $model->description,
+            "Ksh " .($model->products()->first()->pivot->quantity * $model->products()->first()->pivot->price),
+            ($model->products()->first()->pivot->status == OrderStatus::awaiting_shipment)? UI::badge($model->products()->first()->pivot->status, 'warning'): ($model->products()->first()->pivot->status == OrderStatus::in_transit ? UI::badge($model->products()->first()->pivot->status, 'warning') : UI::badge($model->products()->first()->pivot->status, 'success'))
+
+        ];
+    }
+
+    protected function actionsByRow()
+    {
+        return [
+            new MarkOrderInTransit,
+            new MarkOrderDelivered
         ];
     }
 }

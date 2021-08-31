@@ -2,7 +2,10 @@
 
 namespace App\Http\Livewire;
 
+use App\Enums\OrderStatus;
 use App\Models\Order;
+use LaravelViews\Actions\RedirectAction;
+use LaravelViews\Facades\UI;
 use LaravelViews\Views\TableView;
 
 class AdminOrdersTableView extends TableView
@@ -12,7 +15,7 @@ class AdminOrdersTableView extends TableView
      */
     protected $model = Order::class;
 
-    public $searchBy = ['ID', 'status'];
+    public $searchBy = ['id'];
 
     protected $paginate = 10;
 
@@ -26,11 +29,11 @@ class AdminOrdersTableView extends TableView
     public function headers(): array
     {
         return [
-            'ID',
-            'Items',
+            'Order ID',
             'Customer',
             'Seller',
-            'Total Amount',
+            'Additional Info',
+            'Amount',
             'Status'
         ];
     }
@@ -43,7 +46,13 @@ class AdminOrdersTableView extends TableView
     public function row($model): array
     {
         return [
-            $model->id
+            $model->id,
+            $model->user->name,
+            $model->products()->first()->seller->name,
+            ($model->description == null) ? "None": $model->description,
+            "Ksh " .($model->products()->first()->pivot->quantity * $model->products()->first()->pivot->price),
+            ($model->products()->first()->pivot->status == OrderStatus::awaiting_shipment)? UI::badge($model->products()->first()->pivot->status, 'warning'): ($model->products()->first()->pivot->status == OrderStatus::in_transit ? UI::badge($model->products()->first()->pivot->status, 'warning') : UI::badge($model->products()->first()->pivot->status, 'success'))
+
         ];
     }
 }

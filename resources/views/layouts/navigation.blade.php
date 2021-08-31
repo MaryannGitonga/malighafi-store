@@ -6,31 +6,9 @@
                     <i class="bx bx-menu text-indigo-500 text-4xl"
                        @click="mobileMenu = !mobileMenu"></i>
                 </div>
-                @if (Auth::user()->roles()->where('role_id', App\Enums\UserType::Buyer)->first() != null)
-                    @if (Auth::user()->roles()->where('role_id', App\Enums\UserType::Buyer)->first()->pivot->status == App\Enums\AccountStatus::Active)
-                    <button @click="mobileSearch = !mobileSearch"
-                        class="cursor-pointer border-2 transition-colors border-transparent hover:border-indigo-500 rounded-full p-2 sm:p-4 ml-2 sm:ml-3 md:ml-5 lg:mr-8 group focus:outline-none">
-                        <img src="{{ asset('assets/img/icons/icon-search.svg') }}"
-                            class="w-5 sm:w-6 md:w-8 h-5 sm:h-6 md:h-8 block group-hover:hidden"
-                            alt="icon search"/>
-                        <img src="{{ asset('assets/img/icons/icon-search-hover.svg') }}"
-                        class="w-5 sm:w-6 md:w-8 h-5 sm:h-6 md:h-8 hidden group-hover:block"
-                        alt="icon search hover"/>
-                    </button>
-                    <a href="{{ route('buyer.wishlist') }}"
-                        class="border-2 transition-all border-transparent hover:border-indigo-500 rounded-full p-2 sm:p-4 group hidden lg:block">
-                        <img src="{{ asset('assets/img/icons/icon-heart.svg') }}"
-                            class="w-5 sm:w-6 md:w-8 h-5 sm:h-6 md:h-8 block group-hover:hidden"
-                            alt="icon heart"/>
-                        <img src="{{ asset('assets/img/icons/icon-heart-hover.svg') }}"
-                            class="w-5 sm:w-6 md:w-8 h-5 sm:h-6 md:h-8 hidden group-hover:block"
-                            alt="icon heart hover"/>
-                    </a>
-                    @endif
-                @endif
             </div>
             <a href="{{ route('shop') }}">
-                <div class="h-auto flex items-center logo {{ Auth::user() == null ? "mr-48 pr-64" : (Auth::user()->roles()->where('role_id', App\Enums\UserType::Administrator)->first() != null ? "mr-4 pr-2" : "")}}">
+                <div class="h-auto flex items-center logo {{ Auth::user() == null ? "mr-48 pr-64" : (Auth::user()->roles()->where('role_id', App\Enums\UserType::Administrator)->first() != null ? "mr-4 pr-2" : "ml-40")}}">
                     <h1 style="font-family: 'Source Sans Pro', sans-serif; color: #5a67da;" class="lg:text-5xl md:text-4xl sm:text-2xl">Malighafi Store</h1>
                 </div>
             </a>
@@ -173,9 +151,6 @@
                 </a>
                 <a href="{{ route('contact') }}"
                     class="w-full py-3 cursor-pointer font-hk font-medium text-secondary border-b border-grey-dark block">Contact
-                </a>
-                <a href="{{ route('buyer.wishlist') }}"
-                    class="w-full py-3 cursor-pointer font-hk font-medium text-secondary border-b border-grey-dark block">My Wishlist
                 </a>
                 <a href="{{ route('buyer.cart') }}"
                     class="w-full py-3 cursor-pointer font-hk font-medium text-secondary border-b border-grey-dark block">My Cart

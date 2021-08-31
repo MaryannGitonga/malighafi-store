@@ -82,7 +82,24 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         $reviews = $product->reviews()->get();
-        return view('products.show', compact('product','reviews'));
+
+        $cart_items = DB::table('carts')->where('user_id', Auth::id())->get();
+        $exists = false;
+
+        foreach ($cart_items as $item) {
+            if ($item->product_id == $product->id) {
+                $exists = true;
+            }
+        }
+
+        $stars = 0;
+        foreach ($reviews as $review) {
+            $stars += $review->rating;
+        }
+        $stars /= count($reviews);
+        $review_stars = ceil($stars);
+
+        return view('products.show', compact('product','reviews', 'exists', 'review_stars'));
     }
 
     /**
@@ -95,7 +112,8 @@ class ProductController extends Controller
     {
         $units = Unit::all();
         $categories = Category::all();
-        return view('products.edit',compact('product', 'units', 'categories'));
+        $reviews = $product->reviews()->get();
+        return view('products.edit',compact('product', 'units', 'categories', 'reviews'));
 
     }
 

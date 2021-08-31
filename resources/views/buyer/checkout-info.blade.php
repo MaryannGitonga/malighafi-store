@@ -153,7 +153,7 @@
                          alt="Beautiful Brown image"
                          class="w-12 h-16 object-cover object-center"/>
                     <span
-                          class="font-hk text-white text-xs px-2 leading-none absolute top-0 right-0 bg-primary flex items-center justify-center rounded-full -mt-2 -mr-2 h-6 w-6">2</span>
+                          class="font-hk text-white text-xs px-2 leading-none absolute top-0 right-0 bg-primary flex items-center justify-center rounded-full -mt-2 -mr-2 h-6 w-6">{{ $product['quantity'] }}</span>
                 </div>
             </div>
             <p class="font-hk text-secondary text-lg">{{$product['name']}}</p>

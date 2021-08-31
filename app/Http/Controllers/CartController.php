@@ -141,7 +141,7 @@ class CartController extends Controller
                 ));
                 $total_price += ($order_items->price * $item->quantity);
             }
-            return view('buyer.payment',compact('user_details','products','total_price'));
+            return redirect()->route('buyer.payment');
         } else {
             $user_details = DB::table('users')->where('id', Auth::id())->first();
             $cart_items = DB::table('carts')->where('user_id', Auth::id())->get();
@@ -159,7 +159,7 @@ class CartController extends Controller
                 ));
                 $total_price += ($order_items->price * $item->quantity);
             }
-            return view('buyer.payment',compact('user_details','products','total_price'));
+            return redirect()->route('buyer.payment');
         }
     }
 }

@@ -155,7 +155,7 @@
             <p
               class="text-lg font-semibold text-gray-700 dark:text-gray-200"
             >
-              {{ $revenue }}
+              Ksh {{ $revenue }}
             </p>
           </div>
         </div>
@@ -234,41 +234,54 @@
     });
 
     Highcharts.chart('bar', {
-    chart: {
-        type: 'column'
-    },
-    title: {
-        text: ''
-    },
-    xAxis: {
-        categories: Highcharts.getOptions().lang.shortMonths
-    },
-    yAxis: {
-        min: 0,
+        chart: {
+            type: 'column',
+            options3d: {
+                enabled: true,
+                alpha: 10,
+                beta: 25,
+                depth: 70
+            }
+        },
         title: {
-            text: 'Total products sold'
-        }
-    },
-    tooltip: {
-        pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
-        shared: true
-    },
-    plotOptions: {
-        column: {
-            stacking: 'percent'
-        }
-    },
-    series: [{
-        name: 'Product 1',
-        data: [5, 3, 4, 7, 2, 5, 3, 4]
-    }, {
-        name: 'Product 2',
-        data: [2, 2, 3, 2, 1, 2, 2, 3]
-    }, {
-        name: 'Product 3',
-        data: [3, 4, 4, 2, 5, 3, 4, 4]
-    }]
-});
+            text: ''
+        },
+        subtitle: {
+            text: 'Overall sales across the year'
+        },
+        plotOptions: {
+            column: {
+                depth: 25
+            }
+        },
+        xAxis: {
+            categories: Highcharts.getOptions().lang.shortMonths,
+            labels: {
+                skew3d: true,
+                style: {
+                    fontSize: '16px'
+                }
+            }
+        },
+        yAxis: {
+            title: {
+                text: null
+            }
+        },
+        series: [{
+            name: 'Product 1',
+            data: [2, 3, null, 4, 0, 5, 1, 4, 6, 3]
+        },
+        {
+            name: 'Product 2',
+            data: [2, 3, null, 4, 0, 5, 1, 4, 6, 3]
+        },
+        {
+            name: 'Product 3',
+            data: [2, 3, null, 4, 0, 5, 1, 4, 6, 3]
+        },
+        ]
+    });
 </script>
 @endif
 @elseif (Auth::user()->roles()->where('role_id', App\Enums\UserType::Seller)->first() != null)
@@ -306,7 +319,7 @@
             <p
               class="text-lg font-semibold text-gray-700 dark:text-gray-200"
             >
-              {{ count($products) }}
+              {{ count(App\Models\Product::where('seller_id', Auth::user()->id)->get()) }}
             </p>
           </div>
         </div>
@@ -332,7 +345,7 @@
             <p
               class="text-lg font-semibold text-gray-700 dark:text-gray-200"
             >
-              {{ count($orders) }}
+              {{ count($seller_orders) }}
             </p>
           </div>
         </div>
@@ -360,7 +373,7 @@
             <p
               class="text-lg font-semibold text-gray-700 dark:text-gray-200"
             >
-              {{ $revenue }}
+              Ksh {{ $seller_revenue }}
             </p>
           </div>
         </div>
@@ -380,41 +393,54 @@
 </main>
 <script defer>
     Highcharts.chart('bar', {
-    chart: {
-        type: 'column'
-    },
-    title: {
-        text: 'Stacked column chart'
-    },
-    xAxis: {
-        categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
-    },
-    yAxis: {
-        min: 0,
+        chart: {
+            type: 'column',
+            options3d: {
+                enabled: true,
+                alpha: 10,
+                beta: 25,
+                depth: 70
+            }
+        },
         title: {
-            text: 'Total fruit consumption'
-        }
-    },
-    tooltip: {
-        pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
-        shared: true
-    },
-    plotOptions: {
-        column: {
-            stacking: 'percent'
-        }
-    },
-    series: [{
-        name: 'John',
-        data: [5, 3, 4, 7, 2]
-    }, {
-        name: 'Jane',
-        data: [2, 2, 3, 2, 1]
-    }, {
-        name: 'Joe',
-        data: [3, 4, 4, 2, 5]
-    }]
-});
+            text: ''
+        },
+        subtitle: {
+            text: 'Overall sales across the year'
+        },
+        plotOptions: {
+            column: {
+                depth: 25
+            }
+        },
+        xAxis: {
+            categories: Highcharts.getOptions().lang.shortMonths,
+            labels: {
+                skew3d: true,
+                style: {
+                    fontSize: '16px'
+                }
+            }
+        },
+        yAxis: {
+            title: {
+                text: null
+            }
+        },
+        series: [{
+            name: 'Product 1',
+            data: [2, 3, null, 4, 0, 5, 1, 4, 6, 3]
+        },
+        {
+            name: 'Product 2',
+            data: [2, 3, null, 4, 0, 5, 1, 4, 6, 3]
+        },
+        {
+            name: 'Product 3',
+            data: [2, 3, null, 4, 0, 5, 1, 4, 6, 3]
+        },
+        ]
+    });
 </script>
 @endif
 @endif

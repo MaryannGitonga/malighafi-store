@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -30,9 +31,34 @@ class AdminController extends Controller
     public function dashboard()
     {
         $users = User::all();
-        $orders = Order::all();
+        $orders = DB::table('order_product')->get();
         $products = Product::all();
         $revenue = 0;
+
+        foreach ($orders as $item) {
+            $revenue += ($item->quantity * $item->price);
+        }
+
+        $admin_graph = array();
+
+        foreach ($orders as $order) {
+            $product = Product::find($order->product_id);
+            $total = $orders->where('product_id', $order->product_id)->sum('quantity');
+            array_push($admin_graph, [
+                "product" => $product->name,
+                "total" => $total
+            ]);
+        }
+
+        $seller_orders = array();
+        $seller_revenue = 0;
+        foreach ($orders as $item) {
+            $product = Product::find($item->product_id);
+            if ($product->seller->id == Auth::user()->id) {
+                array_push($seller_orders, $item);
+                $seller_revenue += ($item->quantity * $item->price);
+            }
+        }
 
         $chart_items = array();
 
@@ -46,7 +72,7 @@ class AdminController extends Controller
             ]);
         }
 
-        return view('dashboard', compact('users', 'orders', 'products', 'revenue', 'chart_categories'));
+        return view('dashboard', compact('users', 'orders', 'products', 'revenue', 'chart_categories', 'seller_orders', 'seller_revenue'));
     }
 
     public function inbox(Request $request)

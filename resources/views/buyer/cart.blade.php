@@ -153,7 +153,7 @@
                    class="btn btn-outline">Continue Shopping</a>
             </div>
         </div>
-        <form class="sm:w-2/3 md:w-full lg:w-1/3 mx-auto lg:mx-0 mt-16 lg:mt-0">
+        <div class="sm:w-2/3 md:w-full lg:w-1/3 mx-auto lg:mx-0 mt-16 lg:mt-0">
             <div class="bg-grey-light py-8 px-8">
                 <h4 class="font-hkbold text-secondary text-2xl pb-3 text-center sm:text-left">Cart Totals</h4>
                 <div class="mb-12 pt-4">
@@ -166,7 +166,7 @@
                 <a href="{{ route('buyer.checkout-info') }}"
                    class="btn btn-outline bg-primary text-white hover:bg-white hover:text-primary">Proceed to checkout</a> {{--Please change this to a button to submit the note if it's there then redirect to checkout info in the controller method--}}
             </div>
-        </form>
+        </div>
     </div>
 </div>
 @endsection

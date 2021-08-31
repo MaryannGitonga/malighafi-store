@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends(Auth::user() == null ? 'layouts.guest': 'layouts.app')
 
 @section('content')
 <div class="container">
@@ -24,11 +24,43 @@
                 </div>
                 <div class="flex items-center pt-3 pb-8">
                     <div class="flex items-center">
-                        <i class="bx bxs-star text-primary"></i>
-                        <i class="bx bxs-star text-primary"></i>
-                        <i class="bx bxs-star text-primary"></i>
-                        <i class="bx bxs-star text-primary"></i>
-                        <i class="bx bxs-star text-primary"></i>
+                        @if ($review_stars == 5)
+                            <i class="bx bxs-star text-primary"></i>
+                            <i class="bx bxs-star text-primary"></i>
+                            <i class="bx bxs-star text-primary"></i>
+                            <i class="bx bxs-star text-primary"></i>
+                            <i class="bx bxs-star text-primary"></i>
+                        @elseif ($review_stars == 4)
+                            <i class="bx bxs-star text-primary"></i>
+                            <i class="bx bxs-star text-primary"></i>
+                            <i class="bx bxs-star text-primary"></i>
+                            <i class="bx bxs-star text-primary"></i>
+                            <i class="bx bxs-star text-gray-400"></i>
+                        @elseif ($review_stars == 3)
+                            <i class="bx bxs-star text-primary"></i>
+                            <i class="bx bxs-star text-primary"></i>
+                            <i class="bx bxs-star text-primary"></i>
+                            <i class="bx bxs-star text-gray-400"></i>
+                            <i class="bx bxs-star text-gray-400"></i>
+                        @elseif ($review_stars == 2)
+                            <i class="bx bxs-star text-primary"></i>
+                            <i class="bx bxs-star text-primary"></i>
+                            <i class="bx bxs-star text-gray-400"></i>
+                            <i class="bx bxs-star text-gray-400"></i>
+                            <i class="bx bxs-star text-gray-400"></i>
+                        @elseif ($review_stars == 1)
+                            <i class="bx bxs-star text-primary"></i>
+                            <i class="bx bxs-star text-gray-400"></i>
+                            <i class="bx bxs-star text-gray-400"></i>
+                            <i class="bx bxs-star text-gray-400"></i>
+                            <i class="bx bxs-star text-gray-400"></i>
+                        @else
+                            <i class="bx bxs-star text-gray-400"></i>
+                            <i class="bx bxs-star text-gray-400"></i>
+                            <i class="bx bxs-star text-gray-400"></i>
+                            <i class="bx bxs-star text-gray-400"></i>
+                            <i class="bx bxs-star text-gray-400"></i>
+                        @endif
                     </div>
                     <span class="font-hk text-sm text-secondary ml-2">({{ count($reviews) }})</span>
                 </div>
@@ -73,10 +105,12 @@
                 </div>
             </div>
             <div class="flex pb-8 group">
-                <a href=""
-                   class="btn btn-outline mr-4 md:mr-6">Add to Wishlist</a>
+                @if ($exists)
+                    <p>You already have this item in the cart.</p>
+                @else
                 <button type="submit"
                    class="btn btn-outline bg-primary text-white hover:bg-white hover:text-primary">Add to Cart</button>
+                @endif
             </div>
             <p class="font-hk text-secondary">
                 <span class="pr-2">Category:</span> <span class="font-bold text-primary">{{ Illuminate\Support\Str::of($product->category->name)->ucfirst()}}</span>
@@ -129,11 +163,43 @@
                 @foreach ($reviews as $review)
                 <div class="w-5/6 mx-auto border-b border-grey-darker pb-8 text-center sm:text-left">
                     <div class="flex justify-center sm:justify-start items-center pt-3 xl:pt-5">
-                        <i class="bx bxs-star text-primary"></i>
-                        <i class="bx bxs-star text-primary"></i>
-                        <i class="bx bxs-star text-primary"></i>
-                        <i class="bx bxs-star text-primary"></i>
-                        <i class="bx bxs-star text-primary"></i>
+                        @if ($review->rating == 5)
+                            <i class="bx bxs-star text-primary"></i>
+                            <i class="bx bxs-star text-primary"></i>
+                            <i class="bx bxs-star text-primary"></i>
+                            <i class="bx bxs-star text-primary"></i>
+                            <i class="bx bxs-star text-primary"></i>
+                        @elseif ($review->rating == 4)
+                            <i class="bx bxs-star text-primary"></i>
+                            <i class="bx bxs-star text-primary"></i>
+                            <i class="bx bxs-star text-primary"></i>
+                            <i class="bx bxs-star text-primary"></i>
+                            <i class="bx bxs-star text-gray-400"></i>
+                        @elseif ($review->rating == 3)
+                            <i class="bx bxs-star text-primary"></i>
+                            <i class="bx bxs-star text-primary"></i>
+                            <i class="bx bxs-star text-primary"></i>
+                            <i class="bx bxs-star text-gray-400"></i>
+                            <i class="bx bxs-star text-gray-400"></i>
+                        @elseif ($review->rating == 2)
+                            <i class="bx bxs-star text-primary"></i>
+                            <i class="bx bxs-star text-primary"></i>
+                            <i class="bx bxs-star text-gray-400"></i>
+                            <i class="bx bxs-star text-gray-400"></i>
+                            <i class="bx bxs-star text-gray-400"></i>
+                        @elseif ($review->rating == 1)
+                            <i class="bx bxs-star text-primary"></i>
+                            <i class="bx bxs-star text-gray-400"></i>
+                            <i class="bx bxs-star text-gray-400"></i>
+                            <i class="bx bxs-star text-gray-400"></i>
+                            <i class="bx bxs-star text-gray-400"></i>
+                        @else
+                            <i class="bx bxs-star text-gray-400"></i>
+                            <i class="bx bxs-star text-gray-400"></i>
+                            <i class="bx bxs-star text-gray-400"></i>
+                            <i class="bx bxs-star text-gray-400"></i>
+                            <i class="bx bxs-star text-gray-400"></i>
+                        @endif
                     </div>
                     <p class="font-hkbold text-secondary text-lg pt-3">{{$review->title}}</p>
                     <p class="font-hk text-secondary pt-4 lg:w-5/6 xl:w-2/3">{{$review->description}} </p>
@@ -196,15 +262,6 @@
                     @endif
                     @endif
                 @endauth
-            </div>
-            <div :class="{ 'active': activeTab=== 'additional-information' }"
-                 class="tab-pane bg-grey-light py-10 md:py-16 transition-opacity"
-                 role="tabpanel">
-                <div class="w-5/6 mx-auto">
-                    <div class="font-hk text-secondary text-base">
-                        {{ $product->description }}
-                    </div>
-                </div>
             </div>
         </div>
     </div>

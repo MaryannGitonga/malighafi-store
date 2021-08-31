@@ -86,5 +86,76 @@
             </div>
             </form>
     </div>
+    <div class="pb-16 sm:pb-20 md:pb-24"
+         x-data="{ activeTab: 'reviews' }">
+        <div class="tabs flex flex-col sm:flex-row"
+             role="tablist">
+             <span @click="activeTab = 'reviews'"
+                  class="tab-item bg-white hover:bg-grey-light px-10 py-5 text-center sm:text-left border-t-2 border-transparent font-hk font-bold  text-secondary cursor-pointer transition-colors"
+                  :class="{ 'active': activeTab=== 'reviews' }">
+                Reviews
+            </span>
+        </div>
+        <div class="tab-content relative">
+            <div :class="{ 'active': activeTab=== 'reviews' }"
+                 class="tab-pane bg-grey-light py-10 md:py-16 transition-opacity"
+                 role="tabpanel">
+                @if (count($reviews) != 0)
+                @foreach ($reviews as $review)
+                <div class="w-5/6 mx-auto border-b border-grey-darker pb-8 text-center sm:text-left">
+                    <div class="flex justify-center sm:justify-start items-center pt-3 xl:pt-5">
+                        @if ($review->rating == 5)
+                            <i class="bx bxs-star text-primary"></i>
+                            <i class="bx bxs-star text-primary"></i>
+                            <i class="bx bxs-star text-primary"></i>
+                            <i class="bx bxs-star text-primary"></i>
+                            <i class="bx bxs-star text-primary"></i>
+                        @elseif ($review->rating == 4)
+                            <i class="bx bxs-star text-primary"></i>
+                            <i class="bx bxs-star text-primary"></i>
+                            <i class="bx bxs-star text-primary"></i>
+                            <i class="bx bxs-star text-primary"></i>
+                            <i class="bx bxs-star text-gray-400"></i>
+                        @elseif ($review->rating == 3)
+                            <i class="bx bxs-star text-primary"></i>
+                            <i class="bx bxs-star text-primary"></i>
+                            <i class="bx bxs-star text-primary"></i>
+                            <i class="bx bxs-star text-gray-400"></i>
+                            <i class="bx bxs-star text-gray-400"></i>
+                        @elseif ($review->rating == 2)
+                            <i class="bx bxs-star text-primary"></i>
+                            <i class="bx bxs-star text-primary"></i>
+                            <i class="bx bxs-star text-gray-400"></i>
+                            <i class="bx bxs-star text-gray-400"></i>
+                            <i class="bx bxs-star text-gray-400"></i>
+                        @elseif ($review->rating == 1)
+                            <i class="bx bxs-star text-primary"></i>
+                            <i class="bx bxs-star text-gray-400"></i>
+                            <i class="bx bxs-star text-gray-400"></i>
+                            <i class="bx bxs-star text-gray-400"></i>
+                            <i class="bx bxs-star text-gray-400"></i>
+                        @else
+                            <i class="bx bxs-star text-gray-400"></i>
+                            <i class="bx bxs-star text-gray-400"></i>
+                            <i class="bx bxs-star text-gray-400"></i>
+                            <i class="bx bxs-star text-gray-400"></i>
+                            <i class="bx bxs-star text-gray-400"></i>
+                        @endif
+                    </div>
+                    <p class="font-hkbold text-secondary text-lg pt-3">{{$review->title}}</p>
+                    <p class="font-hk text-secondary pt-4 lg:w-5/6 xl:w-2/3">{{$review->description}} </p>
+                    <div class="flex justify-center sm:justify-start items-center pt-3">
+                        <p class="font-hk text-grey-darkest text-sm"><span>By</span> {{$review->user->name}}</p>
+                        <span class="font-hk text-grey-darkest text-sm block px-4">.</span>
+                        <p class="font-hk text-grey-darkest text-sm">{{$review->reviewed_at}}</p>
+                    </div>
+                </div>
+                @endforeach
+                @else
+                <p class="w-5/6 mx-auto">This item has not been reviewed yet.</p>
+                @endif
+            </div>
+        </div>
+    </div>
 </div>
 @endsection
